@@ -1,0 +1,158 @@
+<div class="min-h-screen bg-white text-gray-900 flex">
+      <!-- Sidebar -->
+      <aside class="w-60 border-r border-gray-200 h-screen sticky top-0 p-6 space-y-6 text-sm overflow-y-auto">
+        <div>
+          <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Basics</h2>
+          <ul class="space-y-1">
+            <li><a href="#install" class="block px-2 py-1 rounded hover:bg-gray-100">Install</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Toasts</h2>
+          <ul class="space-y-1">
+            <li><a href="#simple-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Simple Toast</a></li>
+            <li><a href="#info-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Info Toast</a></li>
+            <li><a href="#success-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Success Toast</a></li>
+            <li><a href="#warning-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Warning Toast</a></li>
+            <li><a href="#error-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Error Toast</a></li>
+            <li><a href="#none-toast" class="block px-2 py-1 rounded hover:bg-gray-100">None Toast</a></li>
+            <li><a href="#html-toast" class="block px-2 py-1 rounded hover:bg-gray-100">HTML Message</a></li>
+            <li><a href="#custom-css-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Custom CSS</a></li>
+            <li><a href="#long-message-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Long Message</a></li>
+            <li><a href="#loading-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Loading Icon</a></li>
+            <li><a href="#promise-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Promise Toast</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="flex-1 px-8 py-10 space-y-10 font-sans">
+        <header class="text-center space-y-4">
+          <h1 class="text-5xl font-bold tracking-tight">Toasty</h1>
+          <p class="text-lg text-gray-600">Lightweight and flexible toast notifications for Angular</p>
+          <div class="flex gap-4 justify-center">
+            <button
+              class="px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded shadow font-medium"
+              (click)="makeToast()"
+            >
+              Make a Toast
+            </button>
+            <a
+              href="https://github.com/tu-usuario/ng-toasty"
+              target="_blank"
+              class="px-5 py-2 border border-gray-300 rounded hover:bg-gray-100 transition text-sm"
+            >
+              GitHub ↗
+            </a>
+          </div>
+        </header>
+
+        <section id="simple-toast" class="w-full max-w-lg space-y-4 mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">Simple Toast</h2>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+            <input
+              type="text"
+              placeholder="Title"
+              [(ngModel)]="title"
+              class="w-full px-4 py-2 border border-gray-300 rounded"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <input
+              type="text"
+              placeholder="Message"
+              [(ngModel)]="message"
+              class="w-full px-4 py-2 border border-gray-300 rounded"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Duration: {{ durationToast }}s</label>
+            <input
+              type="range"
+              min="1"
+              max="10"
+              step="1"
+              [(ngModel)]="durationToast"
+              class="w-full"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Position</label>
+            <select
+              [(ngModel)]="containerPosition"
+              class="w-full px-4 py-2 border border-gray-300 rounded"
+            >
+              <option value="top-left">Top left</option>
+              <option value="top">Top</option>
+              <option value="top-right">Top right</option>
+              <option value="bottom-left">Bottom left</option>
+              <option value="bottom">Bottom</option>
+              <option value="bottom-right">Bottom right</option>
+            </select>
+          </div>
+        </section>
+
+        <section id="info-toast" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">Info Toast</h2>
+        </section>
+
+        <section id="success-toast" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">Success Toast</h2>
+        </section>
+
+        <section id="warning-toast" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">Warning Toast</h2>
+        </section>
+
+        <section id="error-toast" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">Error Toast</h2>
+        </section>
+
+        <section id="none-toast" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">None Toast</h2>
+        </section>
+
+        <section id="html-toast" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">HTML Message</h2>
+          <p class="text-sm text-gray-600 mb-4">You can use HTML content in your toast message if your component supports it.</p>
+        </section>
+
+        <section id="custom-css-toast" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">Custom CSS Toast</h2>
+        </section>
+
+        <section id="long-message-toast" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">Long Message Toast</h2>
+        </section>
+
+        <section id="loading-toast" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">Loading Icon Toast</h2>
+        </section>
+
+        <section id="promise-toast" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">Promise Toast</h2>
+        </section>
+
+        <section id="install" class="w-full max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-2">Install</h2>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Install via npm</label>
+          <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300">
+            <code class="text-sm">npm install ng-toasty</code>
+            <button
+              onclick="navigator.clipboard.writeText('npm install ng-toasty')"
+              class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded"
+            >
+              Copy
+            </button>
+          </div>
+        </section>
+
+        <toasty [position]="containerPosition" [duration]="containerDuration"></toasty>
+      </div>
+    </div>
+<router-outlet />

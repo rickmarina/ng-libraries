@@ -1,0 +1,150 @@
+.toasty-container {
+    position: fixed;
+    width: 350px;
+    padding: 1rem;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.toasty-container.left {
+    left: 24px;
+}
+.toasty-container.center {
+    left:50%;
+    transform: translateX(-50%);
+}
+.toasty-container.right { 
+    right: 24px;
+}
+.toasty-container.top {
+    top: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+}
+.toasty-container.bottom {
+    bottom: 0px;
+}
+
+.toasty {
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  animation-name: toasty_fadein;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; 
+  display:flex;
+  align-items: center;
+  pointer-events: auto;
+}
+@keyframes toasty_fadein {
+  from { opacity: 0; transform: translateX(100%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toasty_fadeout {
+  from { opacity: 1; }
+  to   { opacity: 0;
+         pointer-events: none; }
+}
+
+.toasty.fadeout {
+  animation-name: toasty_fadeout;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+.toasty-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+  border-radius: 4px;
+}
+
+.toasty-loading  {
+  width: 10px;
+  height: 10px;
+  margin-right: 0.6rem;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid;
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: loading-toasty-anim 1s linear infinite;
+}
+
+@keyframes loading-toasty-anim {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+
+.toasty-noicon { 
+  width: 7px;
+}
+.toasty-content {
+    flex-direction: column;
+    flex: 1;
+}
+
+.toasty-header {
+  display: flex;
+  align-items: center;
+}
+
+.toasty-title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-right: auto;
+}
+
+.toasty-time {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-right: 1rem;
+}
+
+.toasty-close {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.6;
+}
+
+.toasty-body {
+  font-size: 0.85rem;
+  margin-top: 1px;
+}
+
+
+.toasty-close:hover {
+  opacity: 1;
+}
+
+.toasty.none { background-color: #fff; border-color: hsl(0, 0%, 93%); color:hsl(0, 0%, 9%);}
+.toasty.success { background-color: hsl(143, 85%, 96%); border-color: hsl(145, 92%, 87%); color:hsl(140, 100%, 27%); }
+.toasty.error { background-color: hsl(359, 100%, 97%); border-color: hsl(359, 100%, 94%); color:hsl(360, 100%, 45%); }
+.toasty.info { background-color: hsl(208, 100%, 97%); border-color: hsl(221, 91%, 93%); color:hsl(210, 92%, 45%); }
+.toasty.warning { background-color: hsl(49, 100%, 97%); border-color: hsl(49, 91%, 84%); color:hsl(31, 92%, 45%); }
+.toasty.custom {  background-color: #fff; }
+
+

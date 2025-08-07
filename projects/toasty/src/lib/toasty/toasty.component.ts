@@ -1,0 +1,72 @@
+import { NgClass, NgStyle } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { ToastModel, ToastyService } from '../toasty.service';
+
+enum ToastyContainerPosition {
+  TOP_LEFT = 'top-left',
+  TOP = 'top',
+  TOP_RIGHT = 'top-right',
+  BOTTOM_LEFT = 'bottom-left',
+  BOTTOM = 'bottom',
+  BOTTOM_RIGHT = 'bottom-right'
+}
+
+@Component({
+  selector: 'toasty',
+  standalone: true,
+  imports: [NgClass, NgStyle],
+  templateUrl: './toasty.component.html',
+  styleUrl: './toasty.component.css'
+})
+export class ToastyComponent {
+
+  @Input() position: string = ToastyContainerPosition.BOTTOM_RIGHT;
+  @Input() duration: number = this._toastService.getDefaultDuration();
+  
+  protected toasts: ToastModel[] = [];
+
+  private readonly positionMap: Record<string, string[]> = {
+    'top-left': ['top', 'left'],
+    'top': ['top', 'center'],
+    'top-right': ['top', 'right'],
+    'bottom-left': ['bottom', 'left'],
+    'bottom': ['bottom', 'center'],
+    'bottom-right': ['bottom', 'right'],
+  };
+  constructor(private _toastService: ToastyService) {
+    
+  }
+
+  ngOnInit(): void {
+    this._toastService.setDefaultDuration(this.duration);
+
+    // Subscribe to the toast service to receive new toasts
+    this._toastService.newToast$.subscribe(t => {
+      if (t) {
+        this.toasts = t;
+      }
+    });
+
+    this._toastService.deleteToast$.subscribe(t=> {
+      if (t) {
+        // we dont need to delete toast, because internally in the service the toast has been deleted and in future toasts, only live toasts will be received from the service
+      }
+    });
+
+    this._toastService.updateToast$.subscribe(t=> {
+      if (t) {}
+    })
+  }
+
+  closeToast(id: number): void {
+    this._toastService.removeToast(id);
+  }
+
+  containerClass(): string[] {
+    return this.positionMap[this.position] ?? [ToastyContainerPosition.BOTTOM_RIGHT];
+  }
+
+  expires(t: ToastModel) :boolean {
+    return (t.expires < Date.now());
+  }
+}
