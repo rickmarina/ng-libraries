@@ -1,5 +1,5 @@
 <div class="toasty-container" [ngClass]="containerClass()">
-    @for (item of toasts; track item.id) {
+    @for (item of toasts$ | async; track item.id) {
     <div class="toasty" [ngClass]="item.type" [class.fadeout]="expires(item)" [ngStyle]="item.config?.customStyle">
         @if (item.icon) {
             <div class="toasty-icon">{{item.icon}}</div>

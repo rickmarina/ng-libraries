@@ -12,7 +12,7 @@ interface IToastQueue<T> {
   dequeue(): T | undefined;
   size(): number;
   getElements(): T[];
-  removeId(id: number): void;
+  removeId(id: number): T | undefined;
 }
 
 class Queue<T> implements IToastQueue<T> {
@@ -41,8 +41,13 @@ class Queue<T> implements IToastQueue<T> {
   getElements(): T[] {
     return this.storage;
   }
-  removeId(id: number): void {
-    this.storage = this.storage.filter(item => (item as any).id !== id);
+  removeId(id: number): T | undefined {
+    const index = this.storage.findIndex(item => (item as any).id === id);
+  if (index !== -1) {
+    const [removed] = this.storage.splice(index, 1); 
+    return removed;
+  }
+  return undefined;
   }
 }
 export enum ToastType {
@@ -102,7 +107,7 @@ export class ToastyService {
   private deleteToastBehaviorSubject = new BehaviorSubject<ToastModel | undefined>(undefined);
   public deleteToast$ = this.deleteToastBehaviorSubject.asObservable();
   private updateToastBehaviorSubject = new BehaviorSubject<ToastModel | undefined>(undefined);
-  public updateToast$ = this.newToastBehaviorSubject.asObservable();
+  public updateToast$ = this.updateToastBehaviorSubject.asObservable();
 
   constructor() {
   }
@@ -144,7 +149,7 @@ export class ToastyService {
 
     if (!isPromise) {
       setTimeout(() => {
-        this.dequeueToast();
+        this.removeToast(toast.id);
       }, duration);
     }
 
@@ -186,14 +191,13 @@ export class ToastyService {
 
   }
 
-
-  private dequeueToast(): void {
-    const toast = this.queue.dequeue();
-    this.deleteToastBehaviorSubject.next(toast);
+  removeToast(id: number): void {
+    this.newToastBehaviorSubject.next([...this.queue.getElements()]);
+    const t = this.queue.removeId(id);
   }
 
-  removeToast(id: number): void {
-    this.queue.removeId(id);
+  closeToast(id: number) : void {
+    const t = this.queue.removeId(id);
     this.newToastBehaviorSubject.next([...this.queue.getElements()]);
   }
 

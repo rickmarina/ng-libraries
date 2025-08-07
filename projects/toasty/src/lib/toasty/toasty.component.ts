@@ -1,4 +1,4 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ToastModel, ToastyService } from '../toasty.service';
 
@@ -14,7 +14,7 @@ enum ToastyContainerPosition {
 @Component({
   selector: 'toasty',
   standalone: true,
-  imports: [NgClass, NgStyle],
+  imports: [NgClass, NgStyle, AsyncPipe],
   templateUrl: './toasty.component.html',
   styleUrl: './toasty.component.css'
 })
@@ -23,7 +23,7 @@ export class ToastyComponent {
   @Input() position: string = ToastyContainerPosition.BOTTOM_RIGHT;
   @Input() duration: number = this._toastService.getDefaultDuration();
   
-  protected toasts: ToastModel[] = [];
+  protected toasts$ = this._toastService.newToast$;
 
   private readonly positionMap: Record<string, string[]> = {
     'top-left': ['top', 'left'],
@@ -43,23 +43,26 @@ export class ToastyComponent {
     // Subscribe to the toast service to receive new toasts
     this._toastService.newToast$.subscribe(t => {
       if (t) {
-        this.toasts = t;
+        // console.log(t);
       }
     });
 
     this._toastService.deleteToast$.subscribe(t=> {
       if (t) {
         // we dont need to delete toast, because internally in the service the toast has been deleted and in future toasts, only live toasts will be received from the service
+        // console.log(t);
       }
     });
 
     this._toastService.updateToast$.subscribe(t=> {
-      if (t) {}
+      if (t) {
+        // console.log(t);
+      }
     })
   }
 
   closeToast(id: number): void {
-    this._toastService.removeToast(id);
+    this._toastService.closeToast(id);
   }
 
   containerClass(): string[] {
