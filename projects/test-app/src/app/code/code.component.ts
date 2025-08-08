@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ToastyService, ToastType } from 'toasty';
+import { ToastyService, ToastType, ToastyPromise } from 'toasty';
 
 @Component({
   selector: 'app-code',
@@ -31,7 +31,7 @@ executeCode() {
     // Creamos una función que recibe el cuerpo del código tal cual
     const func = new Function('_toastyService', 'ToastType', `
         ${this.innerCode.replace(/this\._toastyService/g, '_toastyService')};
-      `);
+      `); 
 
     // Llamamos a la función con el contexto del componente
     func(this._toastyService, ToastType);

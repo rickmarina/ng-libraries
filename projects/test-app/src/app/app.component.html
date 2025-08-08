@@ -189,11 +189,13 @@
     <section id="loading-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Loading Icon Toast</h2>
       Aditionally you can add a loding icon, just setting loading: true in the configuration parameter. 
-      <app-code title="loading" [innerCode]="loadingToast"></app-code>
+      <app-code title="Loading" [innerCode]="loadingToast"></app-code>
     </section>
 
     <section id="promise-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Promise Toast</h2>
+      <app-code title="Promise" [innerCode]="promiseToast" [run]="false"></app-code>
+
     </section>
 
     <section id="emoji-toast" class="w-full max-auto">

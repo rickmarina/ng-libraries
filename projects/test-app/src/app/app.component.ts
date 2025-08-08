@@ -167,11 +167,29 @@ export class AppComponent {
 
   public longToast : string = `
   this._toastyService.showToast("Long text", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt euismod nunc quis suscipit. Curabitur sed semper tortor, at efficitur leo. Sed justo nulla, ullamcorper sed maximus a, vehicula ut nulla. Vivamus lobortis lacinia mi eu ultricies. Suspendisse quis sem ante. Vivamus consectetur lectus eget quam venenatis, sagittis aliquam lectus viverra. Donec nec molestie magna, ut ultricies tellus. Praesent faucibus urna imperdiet vulputate dapibus. Sed sit amet dolor odio. Donec est nulla, cursus sed aliquam at, cursus sit amet turpis. Nulla ut dolor eget dui laoreet hendrerit vel at tellus. Nullam aliquet sem at mauris scelerisque molestie. Nullam imperdiet blandit est et aliquam. Vestibulum euismod, libero id tincidunt rutrum, nulla augue aliquet risus, a rutrum elit orci eget lectus.");
-  `
+  `;
 
   public loadingToast: string = `
   this._toastyService.showToast('Wait', 'Process may take a few seconds to complete', { type: ToastType.Custom, loading:true });
-  `
+  `;
+
+  public promiseToast: string = `
+    simulateApiCall(): Promise<{ name: string }> {
+      return new Promise((resolve, reject) =>
+        setTimeout(
+            () => Math.random() < 0.5 ? resolve({ name: 'Toasty resolved' }) : reject(new Error('Toasty rejected'))
+        , 2000)
+      );
+    const promise: ToastyPromise<{ name: string }> = {
+      promise: this.simulateApiCall(),
+      loading: 'Loading',
+      success: (data) => \`Ok $\{data.name}\`,
+      error: 'Error'
+    };
+
+    this._toastyService.showToastPromise('Fetching API', promise);    
+  }
+  `;
   
   public infoToast() {
     this._toastyService.showToast('Info', 'Information body content', { type: ToastType.Info})
@@ -281,6 +299,17 @@ export class AppComponent {
     // }
     // this._toastyService.showToastPromise('Fetching API', promise);
 
+  }
+
+  clickPromiseToast() {
+    const promise: ToastyPromise<{ name: string }> = {
+      promise: this.simulateApiCall(),
+      loading: 'Loading',
+      success: (data) => `Ok ${data.name}`,
+      error: 'Error'
+
+    }
+    this._toastyService.showToastPromise('Fetching API', promise);
   }
 
   simulateApiCall(): Promise<{ name: string }> {
