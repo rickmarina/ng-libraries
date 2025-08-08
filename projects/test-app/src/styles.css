@@ -28,6 +28,7 @@ pre {
 
 .b {
     padding: 8px 12px;
+    margin: 0;
     background: var(--gray1);
     border: 1px solid var(--gray3);
     white-space: nowrap;

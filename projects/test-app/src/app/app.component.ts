@@ -20,7 +20,7 @@ export class AppComponent {
   public message: string = '';
   public containerDuration: number = 5000;
   public containerPosition: string = 'bottom-right';
-  public containerCapacity: number = 5;
+  public containerCapacity: number = 10;
   public durationToast: number = 5;
 
   constructor(private _toastyService: ToastyService) { }
@@ -110,10 +110,22 @@ export class AppComponent {
   public basicToast() {
     this._toastyService.showToast('Title', 'Message body');
   }
+  public infoToast() {
+    this._toastyService.showToast('Info', 'Information body content', { type: ToastType.Info})
+  }
+  public successToast() {
+    this._toastyService.showToast('Success', 'Success body content', { type: ToastType.Success})
+  }
+  public WarningToast() {
+    this._toastyService.showToast('Warning', 'Warning body content', { type: ToastType.Warning})
+  }
+  public ErrorToast() {
+    this._toastyService.showToast('Error', 'Error body content', { type: ToastType.Error})
+  }
 
   public makeToast() {
 
-    const types = [ToastType.Info, ToastType.Success, ToastType.Warning, ToastType.None, ToastType.Error];
+    const types = [ToastType.Info, ToastType.Success, ToastType.Warning, ToastType.Basic, ToastType.Error];
     const type = types[Math.floor(Math.random() * types.length)];
 
     

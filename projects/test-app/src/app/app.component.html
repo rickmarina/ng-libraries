@@ -13,12 +13,11 @@
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Toasts types</h2>
       <ul class="space-y-1">
-        <li><a href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Demo Toast</a></li>
+        <li><a href="#basic-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Basic Toast</a></li>
         <li><a href="#info-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Info Toast</a></li>
         <li><a href="#success-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Success Toast</a></li>
         <li><a href="#warning-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Warning Toast</a></li>
         <li><a href="#error-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Error Toast</a></li>
-        <li><a href="#none-toast" class="block px-2 py-1 rounded hover:bg-gray-100">None Toast</a></li>
         <li><a href="#html-toast" class="block px-2 py-1 rounded hover:bg-gray-100">HTML Message</a></li>
         <li><a href="#custom-css-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Custom CSS</a></li>
         <li><a href="#long-message-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Long Message</a></li>
@@ -29,14 +28,14 @@
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">API</h2>
       <ul class="space-y-1">
-        <li><a href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToast</a></li>
-        <li><a href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastPromise</a></li>
+        <li><a href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToast()</a></li>
+        <li><a href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastPromise()</a></li>
       </ul>
     </div>
   </aside>
 
   <!-- Main content -->
-  <div class="flex-1 px-8 py-10 space-y-10 font-sans text-sm">
+  <div class="flex-1 px-8 py-10 space-y-5 font-sans text-sm">
     <header class="text-center space-y-4">
       <h1 class="text-5xl font-bold tracking-tight">Toasty</h1>
       <p class="text-lg text-gray-600">Lightweight and flexible toast notifications for Angular</p>
@@ -140,8 +139,8 @@
 
     <section id="useservice" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">Service</h2>
-      <label class="block text-sm font-medium text-gray-700 mb-2">Add toasty service to your component and use it to display toasts.</label>
-      <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300">
+      <label class="block mb-2">Add toasty service to your component and use it to display toasts.</label>
+      <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300 mb-2">
         <code class="text-sm language-js">
           constructor(private _toastyService: ToastyService) &lcub; &rcub;
         </code>
@@ -151,8 +150,8 @@
         </button>
       </div>
       <div>
-        <label>Display a basic toast!</label>
-        <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300">
+        <label class="block mb-2">Display a basic toast!</label>
+        <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300 mb-2">
         <code class="text-sm language-js">
           this._toastyService.showToast('Title', 'Message body');
         </code>
@@ -161,7 +160,39 @@
           Copy
         </button>
       </div>
-        <button class="b mt-2" (click)="this.basicToast()">Example service</button>
+        <button class="b" (click)="this.basicToast()">Example service</button>
+      </div>
+    </section>
+
+    <section id="basic-toast" class="w-full mx-auto">
+      <h2 class="text-2xl font-semibold mb-2">Basic Toast</h2>
+      <label class="block mb-2">This is the most elemental toast.</label>
+      <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300 mb-2">
+        <code class="text-sm language-js">this._toastyService.showToast('Title', 'Message body');</code>
+        <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').innerText)"
+          class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">
+          Copy
+        </button>
+      </div>
+    </section>
+
+    <section id="info-toast" class="w-full mx-auto">
+      <h2 class="text-2xl font-semibold mb-2">Info/Success/Warning/Error Toast</h2>
+      <label class="block mb-2">Some customized toasts with color and icon.</label>
+        <button class="b" (click)="this.infoToast()">Info</button>
+        <button class="b" (click)="this.successToast()">Sucess</button>
+        <button class="b" (click)="this.WarningToast()">Warning</button>
+        <button class="b" (click)="this.ErrorToast()">Error</button>
+      <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300 mb-2 mt-2">
+        <pre><code class="text-sm language-js">
+this._toastyService.showToast('Info', 'Information body content', &lcub; type: ToastType.Info&rcub;)
+this._toastyService.showToast('Success', 'Success body content', &lcub; type: ToastType.Success&rcub;)
+this._toastyService.showToast('Warning', 'Warning body content', &lcub; type: ToastType.Warning&rcub;)
+this._toastyService.showToast('Error', 'Error body content', &lcub; type: ToastType.Error&rcub;)</code></pre>
+        <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').innerText)"
+          class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">
+          Copy
+        </button>
       </div>
     </section>
 
@@ -211,25 +242,7 @@
       </div>
     </section>
 
-    <section id="info-toast" class="w-full max-w-lg mx-auto">
-      <h2 class="text-2xl font-semibold mb-2">Info Toast</h2>
-    </section>
-
-    <section id="success-toast" class="w-full max-w-lg mx-auto">
-      <h2 class="text-2xl font-semibold mb-2">Success Toast</h2>
-    </section>
-
-    <section id="warning-toast" class="w-full max-w-lg mx-auto">
-      <h2 class="text-2xl font-semibold mb-2">Warning Toast</h2>
-    </section>
-
-    <section id="error-toast" class="w-full max-w-lg mx-auto">
-      <h2 class="text-2xl font-semibold mb-2">Error Toast</h2>
-    </section>
-
-    <section id="none-toast" class="w-full max-w-lg mx-auto">
-      <h2 class="text-2xl font-semibold mb-2">None Toast</h2>
-    </section>
+    
 
     <section id="html-toast" class="w-full max-w-lg mx-auto">
       <h2 class="text-2xl font-semibold mb-2">HTML Message</h2>

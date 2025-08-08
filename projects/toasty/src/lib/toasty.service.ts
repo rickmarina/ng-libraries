@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 interface IServiceConfig {
-  duration: number,
-  messages: Record<string, string>
+  capacity: number;
+  duration: number;
+  messages: Record<string, string>;
 }
 
 interface IToastQueue<T> {
@@ -52,7 +53,7 @@ class Queue<T> implements IToastQueue<T> {
   }
 }
 export enum ToastType {
-  None = 'none',
+  Basic = 'basic',
   Success = 'success',
   Error = 'error',
   Info = 'info',
@@ -93,6 +94,7 @@ export interface ToastyPromise<T> {
 export class ToastyService {
 
   private TOASTY_SERVICE_CONFIG: IServiceConfig = {
+    capacity : 10,
     duration: 10000,
     messages: {
       now: 'just now',
@@ -101,7 +103,7 @@ export class ToastyService {
     }
   };
 
-  private queue: IToastQueue<ToastModel> = new Queue<ToastModel>();
+  private queue: IToastQueue<ToastModel> = new Queue<ToastModel>(this.TOASTY_SERVICE_CONFIG.capacity);
   private counter: number = 0;
   private newToastBehaviorSubject = new BehaviorSubject<ToastModel[]>([]);
   public newToast$ = this.newToastBehaviorSubject.asObservable();
@@ -115,7 +117,7 @@ export class ToastyService {
 
   setDefaultDuration(d: number): void { this.TOASTY_SERVICE_CONFIG.duration = d; }
   getDefaultDuration(): number { return this.TOASTY_SERVICE_CONFIG.duration; }
-  setCapacity(c: number) { this.queue.setCapacity(c); }
+  setCapacity(c: number) { this.TOASTY_SERVICE_CONFIG.capacity = c; this.queue.setCapacity(c); }
   getCapacity() : number { return this.queue.getCapacity();}
 
   showToast(title: string, message: string, toastConfig?: ToastyConfig | undefined, isPromise?: boolean): number {
@@ -127,7 +129,7 @@ export class ToastyService {
       id: this.counter,
       title: title,
       message: message,
-      type: toastConfig?.type ?? ToastType.None,
+      type: toastConfig?.type ?? ToastType.Basic,
       timestamp: Date.now(),
       expires: isPromise ? Infinity : Date.now() + duration,
       config: toastConfig,
