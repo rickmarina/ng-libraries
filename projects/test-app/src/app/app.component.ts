@@ -118,6 +118,24 @@ export class AppComponent {
   this._toastyService.showToast('Warning', 'Warning body content', { type: ToastType.Warning})
   this._toastyService.showToast('Error', 'Error body content', { type: ToastType.Error})
   `;
+  public componentcode : string = `
+  import { ToastType, ToastyComponent, ToastyPromise, ToastyService } from 'toasty'; 
+  @Component({
+    selector: 'app-root',
+    standalone: true,
+    imports: [ToastyComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
+  })
+  `;
+
+  public customcode : string = `
+  const style = {
+      "background-image": "linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%)",
+      "color": "#fff"
+    };
+    this._toastyService.showToast('Custom', 'Some body content', { type: ToastType.Custom, customStyle: style });
+  `;
   
   public infoToast() {
     this._toastyService.showToast('Info', 'Information body content', { type: ToastType.Info})
@@ -140,7 +158,13 @@ export class AppComponent {
   public htmlToast3() {
     this._toastyService.showToast('Html', 'Achievement unlocked. <img width=100 src=https://64.media.tumblr.com/9440a50c0747a844f1602076e3f80cf8/tumblr_mwq2d3pCMV1t2xnu4o1_400.gif /> ', { type: ToastType.Info, enableHtml: true });
   }
-  
+  public customStyleToast() {
+    const style = {
+      "background-image": "linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%)",
+      "color": "#fff"
+    };
+    this._toastyService.showToast('Custom', 'Some body content', { type: ToastType.Custom, customStyle: style });
+  }
 
   public makeToast() {
 

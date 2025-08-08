@@ -53,15 +53,9 @@
     </header>
 
     <section id="install" class="w-full mx-auto">
-      <h2 class="text-2xl font-semibold mb-2">Install</h2>
+      <h2 class="text-2xl font-semibold mb-2">Installation</h2>
       <label class="block text-sm font-medium text-gray-700 mb-2">Install via npm</label>
-      <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300">
-        <code class="text-sm">npm install ng-toasty</code>
-        <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').innerText)"
-          class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">
-          Copy
-        </button>
-      </div>
+      <app-code [innerCode]="'npm install ng-toasty'" [run]="false"></app-code>
     </section>
 
     <section id="addcomponent" class="w-full mx-auto">
@@ -69,36 +63,13 @@
       <label class="block text-sm font-medium text-gray-700 mb-2">Add component with the following code in your html and
         check
         out you have the required imports in your component.ts</label>
-      <span>component.html</span>
-      <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300">
-        <code class="text-sm language-html">
-           &lt;toasty [position]=&quot;containerPosition&quot; [duration]=&quot;containerDuration&quot; [capacity]=&quot;containerCapacity&quot;&gt;&lt;/toasty&gt;
-        </code>
-        <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').innerText)"
-          class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">
-          Copy
-        </button>
-      </div>
+      <app-code title="component.html" [innerCode]='"<toasty [position]=\"containerPosition\" [duration]=\"containerDuration\" [capacity]=\"containerCapacity\"></toasty>"' [run]="false"></app-code>
       <div class="">Position, capacity and duration are optionally</div>
       <div class="w-full mx-auto my-1">
-        component.ts
-        <div class="relative bg-gray-100 text-gray-800 rounded border border-gray-300" ngNonBindable>
-          <pre><code class="language-js">import &lcub; ToastType, ToastyComponent, ToastyPromise, ToastyService &rcub; from 'toasty'; 
-&#64;Component(&lcub;
-  selector: &#39;app-root&#39;,
-  standalone: true,
-  imports: [ToastyComponent],
-  templateUrl: &#39;./app.component.html&#39;,
-  styleUrl: &#39;./app.component.css&#39;
-&rcub;)</code></pre>
-          <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').innerText)"
-            class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">
-            Copy
-          </button>
-        </div>
+        <app-code title="component.ts" [innerCode]="componentcode" [run]="false"></app-code>
       </div>
-      <section class="w-full max-w-4xl mx-auto my-8">
-        <span>Component parameters</span>
+      <section class="w-4/6">
+        <span class="font-medium">Component parameters</span>
         <div class="overflow-x-auto">
           <table class="min-w-full text-sm text-left border border-gray-200 rounded overflow-hidden">
             <thead class="bg-gray-100 text-xs uppercase text-gray-600 border-b border-gray-200">
@@ -188,10 +159,10 @@
 
     <section id="html-toast" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">HTML Message</h2>
-      <p class="text-sm text-gray-600 mb-4">You can use HTML content in your toast message if you indicate enableHtml as option.</p>
-      <app-code [title]="'Basic with html tags'" [innerCode]="'this._toastyService.showToast(\'Html\', \'<b>Details</b><ul><li>item 1</li><li>item 2</li></ul>\', { type: ToastType.Basic, enableHtml: true });'"></app-code>
-      <app-code [title]="'Success with html content & gif'" [innerCode]="'this._toastyService.showToast(\'Html\', \'Data successfully saved. <img width=80 src=https:\/\/i.kym-cdn.com/entries/icons/original/000/003/231/dancing-spiderman.gif />\', { type: ToastType.Success, enableHtml: true });'"></app-code>
-      <app-code [title]="'Info achievement unlocked'" [innerCode]="'this._toastyService.showToast(\'Html\', \'Achievement unlocked. <img width=100 src=https:\/\/64.media.tumblr.com/9440a50c0747a844f1602076e3f80cf8/tumblr_mwq2d3pCMV1t2xnu4o1_400.gif />\', { type: ToastType.Info, enableHtml: true });'"></app-code>
+      <p class="text-sm text-gray-600 mb-4">You can use HTML content in your toast message if you indicate enableHtml: true as option.</p>
+      <app-code [title]="'Basic toast with html list'" [innerCode]="'this._toastyService.showToast(\'Html\', \'<b>Details list</b><ul><li>item 1</li><li>item 2</li></ul>\', { type: ToastType.Basic, enableHtml: true });'"></app-code>
+      <app-code [title]="'Success toast with html content & gif'" [innerCode]="'this._toastyService.showToast(\'Html\', \'Data successfully saved. <img width=80 src=https:\/\/i.kym-cdn.com/entries/icons/original/000/003/231/dancing-spiderman.gif />\', { type: ToastType.Success, enableHtml: true });'"></app-code>
+      <app-code [title]="'Info toast example with achievement unlocked'" [innerCode]="'this._toastyService.showToast(\'Wizard\', \'Achievement unlocked. <img width=100 src=https:\/\/64.media.tumblr.com/9440a50c0747a844f1602076e3f80cf8/tumblr_mwq2d3pCMV1t2xnu4o1_400.gif />\', { type: ToastType.Info, enableHtml: true });'"></app-code>
     </section>
 
     <section id="demo-toast" class="w-full space-y-4 mx-auto hidden">
@@ -240,23 +211,21 @@
       </div>
     </section>
 
-    
-
-    
-
-    <section id="custom-css-toast" class="w-full max-w-lg mx-auto">
+    <section id="custom-css-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Custom CSS Toast</h2>
+      It is possible to create custom css rules indicating type: Custom and customStyle parameters.
+      <app-code title="Custom red toast" [innerCode]="customcode"></app-code>
     </section>
 
-    <section id="long-message-toast" class="w-full max-w-lg mx-auto">
+    <section id="long-message-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Long Message Toast</h2>
     </section>
 
-    <section id="loading-toast" class="w-full max-w-lg mx-auto">
+    <section id="loading-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Loading Icon Toast</h2>
     </section>
 
-    <section id="promise-toast" class="w-full max-w-lg mx-auto">
+    <section id="promise-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Promise Toast</h2>
     </section>
 
