@@ -23,6 +23,7 @@
         <li><a href="#long-message-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Long Message</a></li>
         <li><a href="#loading-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Loading Icon</a></li>
         <li><a href="#promise-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Promise Toast</a></li>
+        <li><a href="#emoji-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Emoji Toast</a></li>
       </ul>
     </div>
     <div>
@@ -165,7 +166,41 @@
       <app-code [title]="'Info toast example with achievement unlocked'" [innerCode]="'this._toastyService.showToast(\'Wizard\', \'Achievement unlocked. <img width=100 src=https:\/\/64.media.tumblr.com/9440a50c0747a844f1602076e3f80cf8/tumblr_mwq2d3pCMV1t2xnu4o1_400.gif />\', { type: ToastType.Info, enableHtml: true });'"></app-code>
     </section>
 
-    <section id="demo-toast" class="w-full space-y-4 mx-auto hidden">
+    
+
+    <section id="custom-css-toast" class="w-full max-auto">
+      <h2 class="text-2xl font-semibold mb-2">Custom CSS Toast</h2>
+      It is possible to create custom css rules indicating type: Custom and customStyle parameters.
+      <app-code title="Custom red toast" [innerCode]="customcode"></app-code>
+
+      <app-code title="Mango toast" [innerCode]="customcode2"></app-code>
+
+      <app-code title="Blackhole toast" [innerCode]="customcode3"></app-code>
+
+      Note that you can define key:value pairs just as you would in a CSS document inside a variable and assign them to <b>customStyle: style</b>
+    </section>
+
+    <section id="long-message-toast" class="w-full max-auto">
+      <h2 class="text-2xl font-semibold mb-2">Long Message Toast</h2>
+      Toast is adapted vertically in base of the content length. 
+      <app-code title="Long message toast" [innerCode]="longToast"></app-code>
+    </section>
+
+    <section id="loading-toast" class="w-full max-auto">
+      <h2 class="text-2xl font-semibold mb-2">Loading Icon Toast</h2>
+      Aditionally you can add a loding icon, just setting loading: true in the configuration parameter. 
+      <app-code title="loading" [innerCode]="loadingToast"></app-code>
+    </section>
+
+    <section id="promise-toast" class="w-full max-auto">
+      <h2 class="text-2xl font-semibold mb-2">Promise Toast</h2>
+    </section>
+
+    <section id="emoji-toast" class="w-full max-auto">
+      <h2 class="text-2xl font-semibold mb-2">Emoji Toast</h2>
+    </section>
+
+<section id="demo-toast" class="w-full space-y-4 mx-auto hidden">
       <h2 class="text-2xl font-semibold mb-2">Demo</h2>
       <div class="p-3 border border-gray-200 rounded space-y-3">
         <h3 class="text-base font-semibold">Toasty settings</h3>
@@ -210,26 +245,6 @@
         </div>
       </div>
     </section>
-
-    <section id="custom-css-toast" class="w-full max-auto">
-      <h2 class="text-2xl font-semibold mb-2">Custom CSS Toast</h2>
-      It is possible to create custom css rules indicating type: Custom and customStyle parameters.
-      <app-code title="Custom red toast" [innerCode]="customcode"></app-code>
-    </section>
-
-    <section id="long-message-toast" class="w-full max-auto">
-      <h2 class="text-2xl font-semibold mb-2">Long Message Toast</h2>
-    </section>
-
-    <section id="loading-toast" class="w-full max-auto">
-      <h2 class="text-2xl font-semibold mb-2">Loading Icon Toast</h2>
-    </section>
-
-    <section id="promise-toast" class="w-full max-auto">
-      <h2 class="text-2xl font-semibold mb-2">Promise Toast</h2>
-    </section>
-
-
 
     <toasty [position]="containerPosition" [duration]="containerDuration" [capacity]="containerCapacity"></toasty>
   </div>

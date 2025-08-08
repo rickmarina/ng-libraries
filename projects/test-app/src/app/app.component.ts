@@ -136,6 +136,42 @@ export class AppComponent {
     };
     this._toastyService.showToast('Custom', 'Some body content', { type: ToastType.Custom, customStyle: style });
   `;
+
+  public customcode2 : string = `
+  const style = {
+      "background-image": "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
+      "border": "1px solid rgb(182 214 19)",
+      "color": "#fff"
+    };
+    this._toastyService.showToast('Custom', 'Some body content', { type: ToastType.Custom, customStyle: style });
+  `;
+
+  public customcode3 : string = `
+    const style = { 
+      "gap": "12px",
+      "padding": "14px 28px",
+      "background": "linear-gradient(145deg, #0f0f0f, #1c1c1c)",
+      "border": "2px solid rgba(255, 255, 255, 0.2)",
+      "border-radius": "100px",
+      "color": "#fff",
+      "font-size": "16px",
+      "font-weight": "600",
+      "letter-spacing": "0.5px",
+      "cursor": "pointer",
+      "overflow": "hidden",
+      "box-shadow": "0 0 20px rgba(0, 255, 255, 0.1)",
+      "backdrop-filter": "blur(8px)"
+    };
+    this._toastyService.showToast('Custom', 'Some body content', { type: ToastType.Custom, customStyle: style });
+  `;
+
+  public longToast : string = `
+  this._toastyService.showToast("Long text", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt euismod nunc quis suscipit. Curabitur sed semper tortor, at efficitur leo. Sed justo nulla, ullamcorper sed maximus a, vehicula ut nulla. Vivamus lobortis lacinia mi eu ultricies. Suspendisse quis sem ante. Vivamus consectetur lectus eget quam venenatis, sagittis aliquam lectus viverra. Donec nec molestie magna, ut ultricies tellus. Praesent faucibus urna imperdiet vulputate dapibus. Sed sit amet dolor odio. Donec est nulla, cursus sed aliquam at, cursus sit amet turpis. Nulla ut dolor eget dui laoreet hendrerit vel at tellus. Nullam aliquet sem at mauris scelerisque molestie. Nullam imperdiet blandit est et aliquam. Vestibulum euismod, libero id tincidunt rutrum, nulla augue aliquet risus, a rutrum elit orci eget lectus.");
+  `
+
+  public loadingToast: string = `
+  this._toastyService.showToast('Wait', 'Process may take a few seconds to complete', { type: ToastType.Custom, loading:true });
+  `
   
   public infoToast() {
     this._toastyService.showToast('Info', 'Information body content', { type: ToastType.Info})
@@ -220,6 +256,7 @@ export class AppComponent {
           9. Long message
           10. Loading icon
           11. Promise toast
+          12. Emoji
         */
 
     // this._toastyService.showToast(toastMessages[randomid].title, toastMessages[randomid].message, { type: type });
