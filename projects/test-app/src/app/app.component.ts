@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { ToastType, ToastyComponent, ToastyPromise, ToastyService } from 'toasty';
+import { CodeComponent } from "./code/code.component";
 
 type ToastMessage = {
   title: string,
@@ -11,7 +12,7 @@ type ToastMessage = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ToastyComponent, FormsModule],
+  imports: [RouterOutlet, ToastyComponent, FormsModule, CodeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -110,6 +111,14 @@ export class AppComponent {
   public basicToast() {
     this._toastyService.showToast('Title', 'Message body');
   }
+
+  public infosuccessetctoasts : string = `
+  this._toastyService.showToast('Info', 'Information body content', { type: ToastType.Info})
+  this._toastyService.showToast('Success', 'Success body content', { type: ToastType.Success})
+  this._toastyService.showToast('Warning', 'Warning body content', { type: ToastType.Warning})
+  this._toastyService.showToast('Error', 'Error body content', { type: ToastType.Error})
+  `;
+  
   public infoToast() {
     this._toastyService.showToast('Info', 'Information body content', { type: ToastType.Info})
   }
@@ -122,13 +131,21 @@ export class AppComponent {
   public ErrorToast() {
     this._toastyService.showToast('Error', 'Error body content', { type: ToastType.Error})
   }
+  public htmlToast() {
+    this._toastyService.showToast('Html', '<b>Details</b><ul><li>item 1</li><li>item 2</li></ul>', { type: ToastType.Basic, enableHtml: true });
+  }
+  public htmlToast2() {
+    this._toastyService.showToast('Html', 'Data successfully saved. <img width=80 src=https://i.kym-cdn.com/entries/icons/original/000/003/231/dancing-spiderman.gif /> ', { type: ToastType.Success, enableHtml: true });
+  }
+  public htmlToast3() {
+    this._toastyService.showToast('Html', 'Achievement unlocked. <img width=100 src=https://64.media.tumblr.com/9440a50c0747a844f1602076e3f80cf8/tumblr_mwq2d3pCMV1t2xnu4o1_400.gif /> ', { type: ToastType.Info, enableHtml: true });
+  }
+  
 
   public makeToast() {
 
     const types = [ToastType.Info, ToastType.Success, ToastType.Warning, ToastType.Basic, ToastType.Error];
     const type = types[Math.floor(Math.random() * types.length)];
-
-    
 
     const randomid = Math.floor(Math.random() * this.toastMessages.length);
 
