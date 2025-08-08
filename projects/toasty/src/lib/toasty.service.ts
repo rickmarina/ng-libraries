@@ -8,6 +8,7 @@ interface IServiceConfig {
 
 interface IToastQueue<T> {
   setCapacity(c: number) : void;
+  getCapacity() : number;
   enqueue(item: T): void;
   dequeue(): T | undefined;
   size(): number;
@@ -24,11 +25,11 @@ class Queue<T> implements IToastQueue<T> {
   setCapacity(c: number) {
     this.capacity = c;
   }
+  getCapacity() {return this.capacity;}
 
   enqueue(item: T): void {
-    if (this.size() > this.capacity) {
-      console.log('max queue');
-      throw Error('Queue has reached max capacity, you cannot add more items');
+    if (this.size() >= this.capacity) {
+      throw Error('Toasty queue has reached max capacity, you cannot add more items.');
     }
     this.storage.push(item);
   }
@@ -115,6 +116,7 @@ export class ToastyService {
   setDefaultDuration(d: number): void { this.TOASTY_SERVICE_CONFIG.duration = d; }
   getDefaultDuration(): number { return this.TOASTY_SERVICE_CONFIG.duration; }
   setCapacity(c: number) { this.queue.setCapacity(c); }
+  getCapacity() : number { return this.queue.getCapacity();}
 
   showToast(title: string, message: string, toastConfig?: ToastyConfig | undefined, isPromise?: boolean): number {
     this.counter++;
@@ -150,7 +152,7 @@ export class ToastyService {
     if (!isPromise) {
       setTimeout(() => {
         this.removeToast(toast.id);
-      }, duration);
+      }, duration+5);
     }
 
     return this.counter;
@@ -193,7 +195,7 @@ export class ToastyService {
 
   removeToast(id: number): void {
     this.newToastBehaviorSubject.next([...this.queue.getElements()]);
-    const t = this.queue.removeId(id);
+    setTimeout( () => { const t = this.queue.removeId(id); });
   }
 
   closeToast(id: number) : void {

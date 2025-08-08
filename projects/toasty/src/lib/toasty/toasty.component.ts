@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { ToastModel, ToastyService } from '../toasty.service';
 
 enum ToastyContainerPosition {
@@ -22,6 +22,7 @@ export class ToastyComponent {
 
   @Input() position: string = ToastyContainerPosition.BOTTOM_RIGHT;
   @Input() duration: number = this._toastService.getDefaultDuration();
+  @Input() capacity: number = this._toastService.getCapacity();
   
   protected toasts$ = this._toastService.newToast$;
 
@@ -38,14 +39,12 @@ export class ToastyComponent {
   }
 
   ngOnInit(): void {
-    this._toastService.setDefaultDuration(this.duration);
-
     // Subscribe to the toast service to receive new toasts
-    this._toastService.newToast$.subscribe(t => {
-      if (t) {
-        // console.log(t);
-      }
-    });
+    // this._toastService.newToast$.subscribe(t => {
+    //   if (t) {
+    //     // console.log(t);
+    //   }
+    // });
 
     this._toastService.deleteToast$.subscribe(t=> {
       if (t) {
@@ -60,6 +59,16 @@ export class ToastyComponent {
       }
     })
   }
+
+  ngOnChanges(changes:SimpleChanges) : void {
+    if (changes['duration']) {
+      this._toastService.setDefaultDuration(this.duration);
+    }
+    if (changes['capacity']) {
+      this._toastService.setCapacity(changes['capacity'].currentValue);
+    }
+  }
+  
 
   closeToast(id: number): void {
     this._toastService.closeToast(id);
