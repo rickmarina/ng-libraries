@@ -178,17 +178,16 @@ export class AppComponent {
       return new Promise((resolve, reject) =>
         setTimeout(
             () => Math.random() < 0.5 ? resolve({ name: 'Toasty resolved' }) : reject(new Error('Toasty rejected'))
-        , 2000)
-      );
-    const promise: ToastyPromise<{ name: string }> = {
-      promise: this.simulateApiCall(),
-      loading: 'Loading',
-      success: (data) => \`Ok $\{data.name}\`,
-      error: 'Error'
-    };
+        , 2000));
+    }
 
-    this._toastyService.showToastPromise('Fetching API', promise);    
-  }
+    this._toastyService.showToastPromise('Fetching API', 
+                                          {
+                                            promise: this.simulateApiCall(),
+                                            loading: 'Loading',
+                                            success: (data) => \`Ok \${data.name}\`,
+                                            error: 'Error'
+                                          });  
   `;
   
   public infoToast() {
@@ -307,14 +306,12 @@ export class AppComponent {
 
 
   clickPromiseToast() {
-    const promise: ToastyPromise<{ name: string }> = {
-      promise: this.simulateApiCall(),
-      loading: 'Loading',
-      success: (data) => `Ok ${data.name}`,
-      error: 'Error'
-
-    }
-    this._toastyService.showToastPromise('Fetching API', promise);
+    this._toastyService.showToastPromise('Fetching API', {
+                                                            promise: this.simulateApiCall(),
+                                                            loading: 'Loading',
+                                                            success: (data) => `Ok ${data.name}`,
+                                                            error: 'Error'
+                                                          });
   }
 
   simulateApiCall(): Promise<{ name: string }> {
