@@ -39,8 +39,8 @@
   </aside>
 
   <!-- Main content -->
-  <div class="flex-1 px-8 py-10 space-y-5 font-sans text-sm">
-    <header class="text-center space-y-4">
+  <div class="px-8 py-10 space-y-5 font-sans text-sm">
+    <header class="text-center space-y-4 w-5/6">
       <h1 class="text-5xl font-bold tracking-tight">Toasty</h1>
       <p class="text-lg text-gray-600">Lightweight and flexible toast notifications for Angular</p>
       <div class="flex gap-4 justify-center">
@@ -49,7 +49,7 @@
           (click)="makeToast()">
           Make a Toast
         </button>
-        <a href="https://github.com/tu-usuario/ng-toasty" target="_blank"
+        <a href="https://github.com/rickmarina/ng-toasty" target="_blank"
           class="px-5 py-2 border border-gray-300 rounded hover:bg-gray-100 transition text-sm">
           GitHub ↗
         </a>
@@ -79,40 +79,17 @@
     <section id="useservice" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">Service</h2>
       <label class="block mb-2">Add toasty service to your component and use it to display toasts.</label>
-      <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300 mb-2">
-        <code class="text-sm language-js">
-          constructor(private _toastyService: ToastyService) &lcub; &rcub;
-        </code>
-        <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').innerText)"
-          class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">
-          Copy
-        </button>
-      </div>
+      <app-code title="Inject the service in your component" [innerCode]='"constructor(private _toastyService: ToastyService) &lcub; &rcub;"' [run]="false"></app-code>
       <div>
         <label class="block mb-2">Display a basic toast!</label>
-        <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300 mb-2">
-        <code class="text-sm language-js">
-          this._toastyService.showToast('Title', 'Message body');
-        </code>
-        <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').innerText)"
-          class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">
-          Copy
-        </button>
-      </div>
-        <button class="b" (click)="this.basicToast()">Example service</button>
+      <app-code title="Use service to display toasts" [innerCode]="'this._toastyService.showToast(\'Title\', \'Message body\');'" [run]="true"></app-code>
       </div>
     </section>
 
     <section id="basic-toast" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">Basic Toast</h2>
       <label class="block mb-2">This is the most elemental toast.</label>
-      <div class="relative bg-gray-100 text-gray-800 p-4 rounded border border-gray-300 mb-2">
-        <code class="text-sm language-js">this._toastyService.showToast('Title', 'Message body');</code>
-        <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').innerText)"
-          class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">
-          Copy
-        </button>
-      </div>
+      <app-code title="Basic toast" [innerCode]="'this._toastyService.showToast(\'Title\', \'Message body\');'" [run]="true"></app-code>
     </section>
 
     <section id="info-toast" class="w-full mx-auto">
