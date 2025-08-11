@@ -219,6 +219,9 @@ export class AppComponent {
     };
     this._toastyService.showToast('Custom', 'Some body content', { type: ToastType.Custom, customStyle: style });
   }
+  public emojiToast() {
+    this._toastyService.showToast('Error', '♥️love emoji toast♥️');
+  }
 
   public makeToast() {
 
@@ -300,6 +303,8 @@ export class AppComponent {
     // this._toastyService.showToastPromise('Fetching API', promise);
 
   }
+
+
 
   clickPromiseToast() {
     const promise: ToastyPromise<{ name: string }> = {
