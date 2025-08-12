@@ -1,6 +1,20 @@
 <div class="min-h-screen bg-white text-gray-900 flex">
+   <button 
+    id="menu-toggle" 
+    class="md:hidden p-4 focus:outline-none absolute top-2 right-2 z-50"
+    (click)="sidebarOpen = !sidebarOpen"
+  >
+    <!-- Icono hamburguesa -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+    </svg>
+  </button>
+
   <!-- Sidebar -->
-  <aside class="w-60 border-r border-gray-200 h-screen sticky top-0 p-6 space-y-6 text-sm overflow-y-auto">
+  <aside class="md:w-60 border-r border-gray-200 h-screen sticky top-0 p-6 space-y-6 text-sm overflow-y-auto md:translate-x-0 transition-transform duration-300"
+    [class.-translate-x-full]="!sidebarOpen"
+    [class.w-5]="!sidebarOpen"
+    [class.translate-x-0]="sidebarOpen">
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Basics</h2>
       <ul class="space-y-1">
@@ -157,7 +171,7 @@
       <app-code title="Duration" [innerCode]='"<toasty [duration]=\"containerDuration\"></toasty>"' [run]="false"></app-code>
       <app-code title="Duration" [innerCode]='"<toasty [capacity]=\"containerCapacity\"></toasty>"' [run]="false"></app-code>
       <app-code title="All settings together" [innerCode]='"<toasty [position]=\"containerPosition\" [duration]=\"containerDuration\" [capacity]=\"containerCapacity\"></toasty>"' [run]="false"></app-code>
-      <section class="w-4/6">
+      <section class="w-5/6">
         <span class="font-medium">Component parameters</span>
         <div class="overflow-x-auto">
           <table class="min-w-full text-sm text-left border border-gray-200 rounded overflow-hidden">

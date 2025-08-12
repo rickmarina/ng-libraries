@@ -24,6 +24,8 @@ export class AppComponent {
   public containerCapacity: number = 10;
   public durationToast: number = 5;
 
+  public sidebarOpen : boolean = false; 
+
   constructor(private _toastyService: ToastyService) { }
   private toastMessages: ToastMessage[] = [
       {
