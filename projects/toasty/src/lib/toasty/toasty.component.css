@@ -1,21 +1,21 @@
 .toasty-container {
     position: fixed;
     width: 350px;
-    padding: 1rem;
+    padding: 0.5rem;
     right: 0;
     bottom: 0;
     pointer-events: none;
 }
 
 .toasty-container.left {
-    left: 24px;
+    left: 12px;
 }
 .toasty-container.center {
     left:50%;
     transform: translateX(-50%);
 }
 .toasty-container.right { 
-    right: 24px;
+    right: 12px;
 }
 .toasty-container.top {
     top: 10px;

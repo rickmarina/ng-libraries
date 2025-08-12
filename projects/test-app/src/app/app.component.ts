@@ -208,10 +208,10 @@ export class AppComponent {
     this._toastyService.showToast('Html', '<b>Details</b><ul><li>item 1</li><li>item 2</li></ul>', { type: ToastType.Basic, enableHtml: true });
   }
   public htmlToast2() {
-    this._toastyService.showToast('Html', 'Data successfully saved. <img width=80 src=https://i.kym-cdn.com/entries/icons/original/000/003/231/dancing-spiderman.gif /> ', { type: ToastType.Success, enableHtml: true });
+    this._toastyService.showToast('Html', 'Data successfully saved. <img width=80 src=./assets/img/dancing-spiderman.gif /> ', { type: ToastType.Success, enableHtml: true });
   }
   public htmlToast3() {
-    this._toastyService.showToast('Html', 'Achievement unlocked. <img width=100 src=https://64.media.tumblr.com/9440a50c0747a844f1602076e3f80cf8/tumblr_mwq2d3pCMV1t2xnu4o1_400.gif /> ', { type: ToastType.Info, enableHtml: true });
+    this._toastyService.showToast('Html', 'Achievement unlocked. <img width=100 src=./assets/img/wizard.gif /> ', { type: ToastType.Info, enableHtml: true });
   }
   public customStyleToast() {
     const style = {
