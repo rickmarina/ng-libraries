@@ -285,7 +285,7 @@ export class AppComponent {
 
     const styleGradient = gradients[Math.floor(Math.random() * gradients.length)];
 
-    this._toastyService.showToast(this.toastMessages[randomid].title, 'html off <b>test</b>', { type: ToastType.Custom, enableHtml: true, customStyle: styleGradient });
+    this._toastyService.showToast(this.toastMessages[randomid].title, this.toastMessages[randomid].message, { type: ToastType.Custom, enableHtml: true, customStyle: styleGradient });
 
     // 9. Long message
     // this._toastyService.showToast("Long text", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt euismod nunc quis suscipit. Curabitur sed semper tortor, at efficitur leo. Sed justo nulla, ullamcorper sed maximus a, vehicula ut nulla. Vivamus lobortis lacinia mi eu ultricies. Suspendisse quis sem ante. Vivamus consectetur lectus eget quam venenatis, sagittis aliquam lectus viverra. Donec nec molestie magna, ut ultricies tellus. Praesent faucibus urna imperdiet vulputate dapibus. Sed sit amet dolor odio. Donec est nulla, cursus sed aliquam at, cursus sit amet turpis. Nulla ut dolor eget dui laoreet hendrerit vel at tellus. Nullam aliquet sem at mauris scelerisque molestie. Nullam imperdiet blandit est et aliquam. Vestibulum euismod, libero id tincidunt rutrum, nulla augue aliquet risus, a rutrum elit orci eget lectus.");

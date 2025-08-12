@@ -1,5 +1,5 @@
 .codediv {
-    max-width: 60vw;
+    width: 100%;
     overflow: auto;
     margin-top: 4px;
 }
