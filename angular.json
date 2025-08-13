@@ -61,7 +61,7 @@
               "projects/test-app/src/styles.css"
             ],
             "scripts": []
-            ,"baseHref": "/ng-toast-notifier/"
+            ,"baseHref": "/ng-toast-notify/"
           },
           "configurations": {
             "production": {
