@@ -1,24 +1,52 @@
 # NgToastNotifier
 
+Lightweight and flexible toast notifications for Angular simply and effective, perfect to notify the user with short customized messages 
+
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
 
-## Code scaffolding
+[![npm version](https://img.shields.io/npm/v/ng-toast-notifier.svg)](https://www.npmjs.com/package/ng-toast-notifier)
+[Live demo](https://rickmarina.github.io/ng-toast-notifier/)
 
-Run `ng generate component component-name --project ng-toast-notifier` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-toast-notifier`.
-> Note: Don't forget to add `--project ng-toast-notifier` or else it will be added to the default project in your `angular.json` file. 
+## Installation
 
-## Build
+### Install via npm
+```bash
+npm install ng-toast-notifier
+```
 
-Run `ng build ng-toast-notifier` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Add component
+Add the <toasty> placeholder component in your HTML and ensure you have the required imports in your component.ts.
 
-## Publishing
+component.html
+```bash
+<toasty></toasty>
+```
 
-After building your library with `ng build ng-toast-notifier`, go to the dist folder `cd dist/ng-toast-notifier` and run `npm publish`.
+component.ts 
+```bash
+import { ToastType, ToastyComponent, ToastyPromise, ToastyService } from 'ng-toast-notifier'; 
 
-## Running unit tests
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ToastyComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {}
+```
 
-Run `ng test ng-toast-notifier` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Service
+Add the ToastyService to your component and use it to display toasts.
 
-## Further help
+Inject the service in your component:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash 
+constructor(private _toastyService: ToastyService) { }
+```
+
+### Display a basic toast!
+Use the service to display toasts:
+```bash
+this._toastyService.showToast('Title', 'Message body');
+```
