@@ -10,7 +10,8 @@
     "ng",
     "toasty",
     "alert",
-    "messages"
+    "messages",
+    "snackbar"
   ],
   "author": "rickmarina",
   "license": "MIT",
