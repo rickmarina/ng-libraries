@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { CodeComponent } from "./code/code.component";
-import { ToastType, ToastyComponent, ToastyService, ToastyPromise } from 'ng-toast-notifier';
+import { ToastType, ToastyComponent, ToastyService, ToastyPromise } from 'ng-toast-notify';
 
 type ToastMessage = {
   title: string,
@@ -23,7 +23,7 @@ export class AppComponent {
   public containerPosition: string = 'bottom-right';
   public containerCapacity: number = 10;
   public durationToast: number = 5;
-  public libName: string = "ng-toast-notifier";
+  public libName: string = "ng-toast-notify";
 
   public sidebarOpen : boolean = false; 
 

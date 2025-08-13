@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ToastyService, ToastType, ToastyPromise } from 'ng-toast-notifier';
+import { ToastyService, ToastType, ToastyPromise } from 'ng-toast-notify';
 
 @Component({
   selector: 'app-code',

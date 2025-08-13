@@ -1,17 +1,17 @@
-# NgToastNotifier
+# NgToastNotify
 
 Lightweight and flexible toast notifications for Angular simply and effective, perfect to notify the user with short customized messages 
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
 
-[![npm version](https://img.shields.io/npm/v/ng-toast-notifier.svg)](https://www.npmjs.com/package/ng-toast-notifier)
-[Live demo and documentation](https://rickmarina.github.io/ng-toast-notifier/)
+[![npm version](https://img.shields.io/npm/v/ng-toast-notify.svg)](https://www.npmjs.com/package/ng-toast-notify)
+[Live demo and documentation](https://rickmarina.github.io/ng-toast-notify/)
 
 ## Installation
 
 ### Install via npm
 ```bash
-npm install ng-toast-notifier
+npm install ng-toast-notify
 ```
 
 ### Add component
@@ -24,7 +24,7 @@ component.html
 
 component.ts 
 ```bash
-import { ToastType, ToastyComponent, ToastyPromise, ToastyService } from 'ng-toast-notifier'; 
+import { ToastType, ToastyComponent, ToastyPromise, ToastyService } from 'ng-toast-notify'; 
 
 @Component({
   selector: 'app-root',

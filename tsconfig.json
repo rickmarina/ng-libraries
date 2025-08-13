@@ -22,6 +22,9 @@
       "ng-toast-notifier": [
         "./dist/ng-toast-notifier"
       ],
+      "ng-toast-notify": [
+        "./dist/ng-toast-notify"
+      ],
       "toasty": [
         "./dist/toasty"
       ]
