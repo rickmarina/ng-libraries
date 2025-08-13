@@ -5,7 +5,7 @@ Lightweight and flexible toast notifications for Angular simply and effective, p
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
 
 [![npm version](https://img.shields.io/npm/v/ng-toast-notifier.svg)](https://www.npmjs.com/package/ng-toast-notifier)
-[Live demo](https://rickmarina.github.io/ng-toast-notifier/)
+[Live demo and documentation](https://rickmarina.github.io/ng-toast-notifier/)
 
 ## Installation
 
