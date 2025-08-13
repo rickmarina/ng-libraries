@@ -1,5 +1,5 @@
 /*
- * Public API Surface of toasty
+ * Public API Surface of ng-toast-notifier
  */
 
 export * from './lib/toasty.service';

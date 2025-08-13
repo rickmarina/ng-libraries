@@ -8,7 +8,7 @@
         <pre><code class="text-sm language-js">{{innerCode}}</code></pre>
         <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').innerText)"
             (click)="copy()"
-            class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">
+            class="cursor-pointer absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">
             Copy
         </button>
         @if (run) {

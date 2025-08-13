@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { ToastType, ToastyComponent, ToastyPromise, ToastyService } from 'toasty';
 import { CodeComponent } from "./code/code.component";
+import { ToastType, ToastyComponent, ToastyService, ToastyPromise } from 'ng-toast-notifier';
 
 type ToastMessage = {
   title: string,
@@ -23,6 +23,7 @@ export class AppComponent {
   public containerPosition: string = 'bottom-right';
   public containerCapacity: number = 10;
   public durationToast: number = 5;
+  public libName: string = "ng-toast-notifier";
 
   public sidebarOpen : boolean = false; 
 
@@ -121,7 +122,7 @@ export class AppComponent {
   this._toastyService.showToast('Error', 'Error body content', { type: ToastType.Error})
   `;
   public componentcode : string = `
-  import { ToastType, ToastyComponent, ToastyPromise, ToastyService } from 'toasty'; 
+  import { ToastType, ToastyComponent, ToastyPromise, ToastyService } from '${this.libName}'; 
   @Component({
     selector: 'app-root',
     standalone: true,

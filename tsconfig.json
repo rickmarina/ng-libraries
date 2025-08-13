@@ -19,6 +19,9 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "paths": {
+      "ng-toast-notifier": [
+        "./dist/ng-toast-notifier"
+      ],
       "toasty": [
         "./dist/toasty"
       ]
