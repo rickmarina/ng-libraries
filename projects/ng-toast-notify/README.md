@@ -50,3 +50,17 @@ Use the service to display toasts:
 ```bash
 this._toastyService.showToast('Title', 'Message body');
 ```
+
+### Toast types
+1. Simple toast, title and message
+2. Info toast
+3. Success toast
+4. Warning toast
+5. Error toast 
+6. None toast 
+7. Html message toast 
+8. Custom css toast 
+9. Long message
+10. Loading icon
+11. Promise toast
+12. Emoji
