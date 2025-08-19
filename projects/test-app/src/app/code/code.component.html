@@ -5,7 +5,7 @@
     </div>
     }
     <div class="bg-gray-100 text-gray-800 p-3 rounded border border-gray-300 mb-2">
-        <pre><code class="text-sm language-js">{{innerCode}}</code></pre>
+        <pre><code #codeElement class="text-sm language-typescript">{{innerCode}}</code></pre>
         <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').innerText)"
             (click)="copy()"
             class="cursor-pointer absolute top-2 right-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded">

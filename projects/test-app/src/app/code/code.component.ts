@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ToastyService, ToastType, ToastyPromise } from '../../../../ng-toast-notify/src/public-api';
+
+declare var Prism: any;
 
 @Component({
   selector: 'app-code',
@@ -14,9 +16,20 @@ export class CodeComponent {
   @Input() innerCode: string = "";
   @Input() run: boolean = true;
 
+  @ViewChild('codeElement', { static: false }) codeElement!: ElementRef;
+  
   constructor(private _toastyService: ToastyService) {
   }
 
+  ngAfterViewInit() {
+    this.highlightCode();
+  }
+
+  highlightCode() {
+    if (this.codeElement && typeof Prism !== 'undefined') {
+      Prism.highlightElement(this.codeElement.nativeElement);
+    }
+  }
   copy() {
     this._toastyService.showToast('Copied', '', { type: ToastType.Info});
   }
