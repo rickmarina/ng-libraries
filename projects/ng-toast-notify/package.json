@@ -1,6 +1,6 @@
 {
   "name": "ng-toast-notify",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lightweight and flexible toast notifications for Angular ",
   "keywords": [
     "angular",
@@ -17,10 +17,10 @@
   ],
   "author": "rickmarina",
   "license": "MIT",
-  "homepage": "https://rickmarina.github.io/ng-toast-notify/",
+  "homepage": "https://rickmarina.github.io/ng-libraries/ng-toast-notify",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rickmarina/ng-toast-notify.git"
+    "url": "git+https://github.com/rickmarina/ng-libraries.git"
   },
   "peerDependencies": {
     "@angular/common": "^17.3.0",
