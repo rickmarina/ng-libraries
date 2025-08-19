@@ -1,6 +1,6 @@
 {
   "name": "ng-toast-notify",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Lightweight and flexible toast notifications for Angular ",
   "keywords": [
     "angular",
@@ -8,6 +8,7 @@
     "notification",
     "notify",
     "ng",
+    "ngx",
     "toasty",
     "alert",
     "messages",
