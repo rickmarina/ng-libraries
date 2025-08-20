@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Input, SimpleChanges } from '@angular/core';
 import { ToastModel, ToastyService } from '../toasty.service';
 
 enum ToastyContainerPosition {
@@ -23,7 +23,7 @@ export class ToastyComponent {
   @Input() position: string = ToastyContainerPosition.BOTTOM_RIGHT;
   @Input() duration: number = this._toastService.getDefaultDuration();
   @Input() capacity: number = this._toastService.getCapacity();
-  
+
   protected toasts$ = this._toastService.newToast$;
 
   private readonly positionMap: Record<string, string[]> = {
@@ -35,7 +35,7 @@ export class ToastyComponent {
     'bottom-right': ['bottom', 'right'],
   };
   constructor(private _toastService: ToastyService) {
-    
+
   }
 
   ngOnInit(): void {
@@ -46,21 +46,21 @@ export class ToastyComponent {
     //   }
     // });
 
-    this._toastService.deleteToast$.subscribe(t=> {
+    this._toastService.deleteToast$.subscribe(t => {
       if (t) {
         // we dont need to delete toast, because internally in the service the toast has been deleted and in future toasts, only live toasts will be received from the service
         // console.log(t);
       }
     });
 
-    this._toastService.updateToast$.subscribe(t=> {
+    this._toastService.updateToast$.subscribe(t => {
       if (t) {
         // console.log(t);
       }
     })
   }
 
-  ngOnChanges(changes:SimpleChanges) : void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['duration']) {
       this._toastService.setDefaultDuration(this.duration);
     }
@@ -68,7 +68,7 @@ export class ToastyComponent {
       this._toastService.setCapacity(changes['capacity'].currentValue);
     }
   }
-  
+
 
   closeToast(id: number): void {
     this._toastService.closeToast(id);
@@ -78,7 +78,36 @@ export class ToastyComponent {
     return this.positionMap[this.position] ?? [ToastyContainerPosition.BOTTOM_RIGHT];
   }
 
-  expires(t: ToastModel) :boolean {
+  expires(t: ToastModel): boolean {
     return (t.expires < Date.now());
   }
+
+  // Swipe to close functionality
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {
+    const toastid = this.localizeToastIdFromTouch(event);
+    this._toastService.updateTouchStart(toastid, event.changedTouches[0]);
+  }
+
+  @HostListener('touchend', ['$event'])
+  onTouchEnd(event: TouchEvent) {
+    this._toastService.updateTouchEnd(event.changedTouches[0]);
+  }
+
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent) {
+    this._toastService.updateTouchMove(event.changedTouches[0]);
+  }
+
+  private localizeToastIdFromTouch(event: TouchEvent): number {
+    let current = event.target as HTMLElement;
+    let maxnesting : number = 4;
+    while (!current.classList.contains('toasty') && maxnesting > 0) {
+      current = current.parentElement as HTMLElement;
+      maxnesting--;
+    }
+
+    return parseInt(current.getAttribute('data-toast-id') || '0');
+  }
+
 }

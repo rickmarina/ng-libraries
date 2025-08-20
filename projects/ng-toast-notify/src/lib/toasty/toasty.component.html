@@ -1,28 +1,32 @@
 <div class="toasty-container" [ngClass]="containerClass()">
     @for (item of toasts$ | async; track item.id) {
-    <div class="toasty" [ngClass]="item.type" [class.fadeout]="expires(item)" [ngStyle]="item.config?.customStyle">
-        @if (item.icon) {
+    <div class="toasty-wrapper" [style.transform]="'translateX(' + (item.gesture?.offsetX || 0) + 'px)'"
+                                [style.transition]="item.gesture ? 'none' : 'transform 0.3s ease'">
+        <div class="toasty" [attr.data-toast-id]="item.id" [ngClass]="item.type" [class.fadeout]="expires(item)"
+            [ngStyle]="item.config?.customStyle">
+            @if (item.icon) {
             <div class="toasty-icon">{{item.icon}}</div>
-        } @else if (item.config?.loading){
+            } @else if (item.config?.loading){
             <div class="toasty-loading"></div>
-        } @else {
-            <div class="toasty-noicon"></div>
-        }
-        <div class="toasty-content">
-            @if (item.title) {
-            <div class="toasty-header">
-                <strong class="toasty-title">{{item.title}}</strong>
-                <!-- <small class="toasty-time">{{item.timestamp}}</small> -->
-            </div>
-            }
-            @if (item.config?.enableHtml) {
-                <div class="toasty-body" [innerHTML]="item.message"></div>
             } @else {
-                <div class="toasty-body">{{item.message}}</div>
+            <div class="toasty-noicon"></div>
             }
-        </div>
-        <div class="toasty-close">
-            <button type="button" class="toasty-close" (click)="closeToast(item.id)">&times;</button>
+            <div class="toasty-content">
+                @if (item.title) {
+                <div class="toasty-header">
+                    <strong class="toasty-title">{{item.title}}</strong>
+                    <!-- <small class="toasty-time">{{item.timestamp}}</small> -->
+                </div>
+                }
+                @if (item.config?.enableHtml) {
+                <div class="toasty-body" [innerHTML]="item.message"></div>
+                } @else {
+                <div class="toasty-body">{{item.message}}</div>
+                }
+            </div>
+            <div class="toasty-close">
+                <button type="button" class="toasty-close" (click)="closeToast(item.id)">&times;</button>
+            </div>
         </div>
     </div>
     }
