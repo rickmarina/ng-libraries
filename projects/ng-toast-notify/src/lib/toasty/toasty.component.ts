@@ -85,20 +85,12 @@ export class ToastyComponent {
   // Swipe to close functionality
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent) {
-    // console.log('Touch start detected', event);
-
-    // Localize the toast ID from the touch event
     const toastid = this.localizeToastIdFromTouch(event);
-    console.log('Current toast ID:', toastid);
-
     this._toastService.updateTouchStart(toastid, event.changedTouches[0]);
   }
 
   @HostListener('touchend', ['$event'])
   onTouchEnd(event: TouchEvent) {
-    console.log('Touch end detected', event);
-
-    // pass the touch end event to the service
     this._toastService.updateTouchEnd(event.changedTouches[0]);
   }
 
