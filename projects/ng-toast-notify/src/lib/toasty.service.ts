@@ -5,6 +5,7 @@ interface IServiceConfig {
   capacity: number;
   duration: number;
   messages: Record<string, string>;
+  threshold_offsetX: number; 
 }
 
 interface IToastQueue<T> {
@@ -61,6 +62,13 @@ export enum ToastType {
   Custom = 'custom'
 }
 
+interface ToastGesture {
+  date: number; 
+  touchStart?: Touch;
+  touchEnd?: Touch;
+  offsetX?: number;
+}
+
 export interface ToastModel {
   id: number;
   title: string;
@@ -70,6 +78,8 @@ export interface ToastModel {
   expires: number;
   config?: ToastyConfig;
   get icon(): string;
+
+  gesture?: ToastGesture;
 }
 
 export interface ToastyConfig {
@@ -100,8 +110,10 @@ export class ToastyService {
       now: 'just now',
       seconds: '{0} seconds ago',
       minutes: '{0} minutes ago'
-    }
+    },
+    threshold_offsetX: 170
   };
+
 
   private queue: IToastQueue<ToastModel> = new Queue<ToastModel>(this.TOASTY_SERVICE_CONFIG.capacity);
   private counter: number = 0;
@@ -205,13 +217,50 @@ export class ToastyService {
     this.newToastBehaviorSubject.next([...this.queue.getElements()]);
   }
 
+  updateTouchStart(id: number, touch: Touch) : void {
+    const gesture : ToastGesture = { date : Date.now(), touchStart: touch };
+    this.updateToast(id, {gesture: gesture});
+  }
+
+  // Loops through the toasts to find which one was touched and updates its touchEnd
+  updateTouchEnd(touch: Touch) : void {
+    const toasts = this.queue.getElements().forEach(
+      t=> {
+        if (t.gesture) {
+          const deltaY = Math.abs(touch.clientY - t.gesture.touchStart!.clientY);
+          const deltaX = Math.abs(touch.clientX - t.gesture.touchStart!.clientX);
+          const deltaTime = Date.now() - t.gesture.date;
+
+          console.log(`Touch End: deltaY=${deltaY}, deltaX=${deltaX}, deltaTime=${deltaTime}`);
+
+          if (deltaTime < 500 && deltaX > this.TOASTY_SERVICE_CONFIG.threshold_offsetX) {
+            this.closeToast(t.id);
+          }
+          else {
+            t.gesture = undefined; // Reset gesture if not swiped
+          }
+        }
+      }
+    )
+  }
+
+  updateTouchMove(touch: Touch): void {
+    const toasts = this.queue.getElements();
+    toasts.forEach(t => {
+      if (t.gesture) {
+        const deltaX = touch.clientX - t.gesture.touchStart!.clientX;
+        t.gesture.offsetX = deltaX; // Store the offset for potential use in UI updates
+      }
+    });
+  }
+
   private updateToast(id: number, newData: Partial<ToastModel>): void {
     const toasts = this.queue.getElements();
     const index = toasts.findIndex(t => t.id === id);
 
     if (index !== -1) {
-      this.queue.getElements()[index] = { ...toasts[index], ...newData };
-      this.newToastBehaviorSubject.next([...this.queue.getElements()]);
+      toasts[index] = { ...toasts[index], ...newData };
+      this.newToastBehaviorSubject.next([...toasts]);
     }
   }
 
