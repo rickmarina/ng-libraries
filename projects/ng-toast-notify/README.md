@@ -67,3 +67,4 @@ this._toastyService.showToast('Title', 'Message body');
 
 ### Other features 
 Close on swipe
+Notify sound (beep)
