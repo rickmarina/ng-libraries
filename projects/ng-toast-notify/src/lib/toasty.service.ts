@@ -231,8 +231,6 @@ export class ToastyService {
           const deltaX = Math.abs(touch.clientX - t.gesture.touchStart!.clientX);
           const deltaTime = Date.now() - t.gesture.date;
 
-          console.log(`Touch End: deltaY=${deltaY}, deltaX=${deltaX}, deltaTime=${deltaTime}`);
-
           if (deltaTime < 500 && deltaX > this.TOASTY_SERVICE_CONFIG.threshold_offsetX) {
             this.closeToast(t.id);
           }
