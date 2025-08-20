@@ -1,6 +1,6 @@
 {
   "name": "ng-toast-notify",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Lightweight and flexible toast notifications for Angular ",
   "keywords": [
     "angular",
@@ -14,6 +14,7 @@
     "messages",
     "snackbar",
     "success",
+    "swipe",
     "advise"
   ],
   "author": "rickmarina",
