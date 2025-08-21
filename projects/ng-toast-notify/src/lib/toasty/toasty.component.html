@@ -27,6 +27,9 @@
             <div class="toasty-close">
                 <button type="button" class="toasty-close" (click)="closeToast(item.id)">&times;</button>
             </div>
+            @if (item.config?.progressBar) {
+                <div class="toasty-progress" [class.animate]="item.animatePbar" [style.transition-duration.ms]="item.duration"></div>
+            }
         </div>
     </div>
     }

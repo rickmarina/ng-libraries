@@ -76,11 +76,13 @@ export interface ToastModel {
   message: string;
   type: ToastType;
   timestamp: number;
+  duration: number;
   expires: number;
   config?: ToastyConfig;
   get icon(): string;
 
   gesture?: ToastGesture;
+  animatePbar?: boolean; // Used to animate the progress bar
 }
 
 export interface ToastyConfig {
@@ -90,6 +92,7 @@ export interface ToastyConfig {
   customStyle?: Record<string, string>;
   loading?: boolean;
   beep?: boolean;
+  progressBar?: boolean;
 }
 
 export interface ToastyPromise<T> {
@@ -145,6 +148,7 @@ export class ToastyService {
       message: message,
       type: toastConfig?.type ?? ToastType.Basic,
       timestamp: Date.now(),
+      duration: duration,
       expires: isPromise ? Infinity : Date.now() + duration,
       config: toastConfig,
       get icon() {
@@ -165,14 +169,21 @@ export class ToastyService {
 
     this.newToastBehaviorSubject.next([...this.queue.getElements()]);
 
+
+    if (toast.config?.beep) {
+      this._toastySoundService.notify();
+    }
+
+    if (toast.config?.progressBar) {
+      setTimeout(() => {
+        this.updateToast(toast.id, { animatePbar: true });
+      }, 100);
+    }
+
     if (!isPromise) {
       setTimeout(() => {
         this.removeToast(toast.id);
       }, duration + 5);
-    }
-
-    if (toast.config?.beep) {
-      this._toastySoundService.notify();
     }
 
     return this.counter;
