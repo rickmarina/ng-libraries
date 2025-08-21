@@ -82,6 +82,11 @@ export class ToastyComponent {
     return (t.expires < Date.now());
   }
 
+  getDurationUntilExpire(expires: number): number {
+    const duration = expires - Date.now();
+    return duration > 0 ? duration : 0;
+  }
+
   // Swipe to close functionality
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent) {
