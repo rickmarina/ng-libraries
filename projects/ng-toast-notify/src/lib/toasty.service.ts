@@ -110,7 +110,7 @@ export class ToastyService {
 
   private TOASTY_SERVICE_CONFIG: IServiceConfig = {
     capacity: 10,
-    duration: 10000,
+    duration: 5000,
     messages: {
       now: 'just now',
       seconds: '{0} seconds ago',
