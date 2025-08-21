@@ -9,23 +9,26 @@ export class ToastysoundService {
 
   private oscillatorType: OscillatorType = 'sine';
   private frequency: number = 430;
+  private audioCtx: AudioContext = new AudioContext();
 
   notify() {
-    const audioCtx = new AudioContext();
-
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
+    if (this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume();
+    }
+    
+    const osc = this.audioCtx.createOscillator();
+    const gain = this.audioCtx.createGain();
 
     osc.type = this.oscillatorType;
     osc.frequency.value = this.frequency;
 
-    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.00009, audioCtx.currentTime + 0.4);
+    gain.gain.setValueAtTime(0.3, this.audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.00009, this.audioCtx.currentTime + 0.4);
 
     osc.connect(gain);
-    gain.connect(audioCtx.destination);
+    gain.connect(this.audioCtx.destination);
 
     osc.start(0);
-    osc.stop(audioCtx.currentTime + 1);
+    osc.stop(this.audioCtx.currentTime + 1);
   }
 }

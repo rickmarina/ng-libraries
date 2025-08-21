@@ -66,5 +66,5 @@ this._toastyService.showToast('Title', 'Message body');
 12. Emoji
 
 ### Other features 
-Close on swipe
-Notify sound (beep)
+1. Close on swipe
+2. Notify sound (beep)
