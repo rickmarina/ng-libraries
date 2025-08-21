@@ -43,6 +43,7 @@
       <ul class="space-y-1">
         <li><a href="#swipe" class="block px-2 py-1 rounded hover:bg-gray-100">Close on swipe</a></li>
         <li><a href="#beep" class="block px-2 py-1 rounded hover:bg-gray-100">Beep sound</a></li>
+        <li><a href="#progressbar" class="block px-2 py-1 rounded hover:bg-gray-100">Progress bar</a></li>
       </ul>
     </div>
     <div>
@@ -182,6 +183,12 @@
       <h2 class="text-2xl font-semibold mb-2">Beep sound</h2>
       <div class="w-4/6">You can enable a beep sound when a toast is displayed. This is useful for notifications that require attention. By default beeps are false</div>
       <app-code title="Notify sound" [innerCode]="'this._toastyService.showToast(\'Beep\', \'This toast will beep\',{ beep: true });'" [run]="true"></app-code>
+    </section>
+
+    <section id="progressbar" class="w-full max-auto">
+      <h2 class="text-2xl font-semibold mb-2">Progress Bar</h2>
+      <div class="w-4/6">You can add a progress bar to your toast. It will animate while the toast is visible.</div>
+      <app-code title="Progress bar" [innerCode]="'this._toastyService.showToast(\'Progress\', \'This toast has a progress bar\', { progressBar: true });'" [run]="true"></app-code>
     </section>
 
     <section id="container-settings" class="w-full max-auto">

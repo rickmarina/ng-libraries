@@ -136,7 +136,6 @@
   margin-top: 1px;
 }
 
-
 .toasty-close:hover {
   opacity: 1;
 }
@@ -148,4 +147,20 @@
 .toasty.warning { background-color: hsl(49, 100%, 97%); border-color: hsl(49, 91%, 84%); color:hsl(31, 92%, 45%); }
 .toasty.custom {  background-color: #fff; }
 
+.toasty-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background-color: currentColor;
+  opacity: 0.3;
+  transform-origin: left;
+  transform: scaleX(1);
+  transition-property: transform;
+  transition-timing-function: linear;
+}
 
+.toasty-progress.animate {
+  transform: scaleX(0);
+}
