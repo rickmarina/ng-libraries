@@ -39,11 +39,12 @@
       </ul>
     </div>
     <div>
-      <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Swipe</h2>
+      <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Toast config</h2>
       <ul class="space-y-1">
         <li><a href="#swipe" class="block px-2 py-1 rounded hover:bg-gray-100">Close on swipe</a></li>
         <li><a href="#beep" class="block px-2 py-1 rounded hover:bg-gray-100">Beep sound</a></li>
         <li><a href="#progressbar" class="block px-2 py-1 rounded hover:bg-gray-100">Progress bar</a></li>
+        <li><a href="#sticky" class="block px-2 py-1 rounded hover:bg-gray-100">Sticky</a></li>
       </ul>
     </div>
     <div>
@@ -189,6 +190,12 @@
       <h2 class="text-2xl font-semibold mb-2">Progress Bar</h2>
       <div class="w-4/6">You can add a progress bar to your toast. It will animate while the toast is visible.</div>
       <app-code title="Progress bar" [innerCode]="'this._toastyService.showToast(\'Progress\', \'This toast has a progress bar\', { progressBar: true });'" [run]="true"></app-code>
+    </section>
+
+    <section id="sticky" class="w-full max-auto">
+      <h2 class="text-2xl font-semibold mb-2">Sticky Toast</h2>
+      <div class="w-4/6">You can create a sticky toast that will not disappear automatically. The user must close it manually.</div>
+      <app-code title="Sticky toast" [innerCode]="'this._toastyService.showToast(\'Sticky\', \'This toast is sticky and will not disappear automatically.\', { sticky: true });'" [run]="true"></app-code>
     </section>
 
     <section id="container-settings" class="w-full max-auto">

@@ -88,6 +88,7 @@ export interface ToastModel {
 export interface ToastyConfig {
   type?: ToastType;
   duration?: number;
+  sticky?: boolean;
   enableHtml?: boolean;
   customStyle?: Record<string, string>;
   loading?: boolean;
@@ -140,7 +141,8 @@ export class ToastyService {
   showToast(title: string, message: string, toastConfig?: ToastyConfig | undefined, isPromise?: boolean): number {
     this.counter++;
 
-    const duration = toastConfig?.duration ?? this.TOASTY_SERVICE_CONFIG.duration;
+    // if sticky is true duration is infinity else use the provided duration or the default one
+    const duration = toastConfig?.sticky ? Infinity : (toastConfig?.duration ?? this.TOASTY_SERVICE_CONFIG.duration);
 
     const toast: ToastModel = {
       id: this.counter,
@@ -169,21 +171,23 @@ export class ToastyService {
 
     this.newToastBehaviorSubject.next([...this.queue.getElements()]);
 
-
     if (toast.config?.beep) {
       this._toastySoundService.notify();
     }
 
-    if (toast.config?.progressBar) {
-      setTimeout(() => {
-        this.updateToast(toast.id, { animatePbar: true });
-      }, 100);
-    }
+    // if sticky progress bar is not animated and toast will not expire
+    if (!toast.config?.sticky) {
+      if (toast.config?.progressBar) {
+        setTimeout(() => {
+          this.updateToast(toast.id, { animatePbar: true });
+        }, 100);
+      }
 
-    if (!isPromise) {
-      setTimeout(() => {
-        this.removeToast(toast.id);
-      }, duration + 5);
+      if (!isPromise) {
+        setTimeout(() => {
+          this.removeToast(toast.id);
+        }, duration + 5);
+      }
     }
 
     return this.counter;
@@ -220,13 +224,17 @@ export class ToastyService {
           config: { loading: false }
         });
       })
-      .finally(() => setTimeout(() => this.removeToast(idtoast), duration));
+      .finally(() => {
+        if (!config?.sticky)
+          setTimeout(() => this.removeToast(idtoast), duration)
+        }
+      );
 
   }
 
   removeToast(id: number): void {
-    this.newToastBehaviorSubject.next([...this.queue.getElements()]);
-    setTimeout(() => { const t = this.queue.removeId(id); });
+    this.newToastBehaviorSubject.next([...this.queue.getElements()]); // Trigger re-render to start exit animation
+    setTimeout(() => { const t = this.queue.removeId(id); this.newToastBehaviorSubject.next([...this.queue.getElements()]);}, 500); // Wait for animation to finish before removing from queue
   }
 
   closeToast(id: number): void {

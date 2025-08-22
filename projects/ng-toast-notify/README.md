@@ -65,7 +65,8 @@ this._toastyService.showToast('Title', 'Message body');
 11. Promise toast
 12. Emoji
 
-### Other features 
+### Toast features 
 1. Close on swipe
 2. Notify sound (beep)
 3. Progress bar
+4. Sticky toast (have to be closed manually)
