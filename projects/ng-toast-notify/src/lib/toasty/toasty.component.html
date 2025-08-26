@@ -1,7 +1,7 @@
 <div class="toasty-container" [ngClass]="containerClass()">
     @for (item of toasts$ | async; track item.id) {
     <div class="toasty-wrapper" [style.transform]="'translateX(' + (item.gesture?.offsetX || 0) + 'px)'"
-                                [style.transition]="item.gesture ? 'none' : 'transform 0.3s ease'">
+        [style.transition]="item.gesture ? 'none' : 'transform 0.3s ease'">
         <div class="toasty" [attr.data-toast-id]="item.id" [ngClass]="item.type" [class.fadeout]="expires(item)"
             [ngStyle]="item.config?.customStyle">
             @if (item.icon) {
@@ -15,6 +15,9 @@
                 @if (item.title) {
                 <div class="toasty-header">
                     <strong class="toasty-title">{{item.title}}</strong>
+                    @if (item.count > 1) {
+                        <span class="toasty-badge">x{{item.count}}</span>
+                    }
                     <!-- <small class="toasty-time">{{item.timestamp}}</small> -->
                 </div>
                 }
@@ -28,7 +31,8 @@
                 <button type="button" class="toasty-close" (click)="closeToast(item.id)">&times;</button>
             </div>
             @if (item.config?.progressBar) {
-                <div class="toasty-progress" [class.animate]="item.animatePbar" [style.transition-duration.ms]="item.duration"></div>
+            <div class="toasty-progress" [class.animate]="item.animatePbar"
+                [style.transition-duration.ms]="item.duration"></div>
             }
         </div>
     </div>

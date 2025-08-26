@@ -164,3 +164,15 @@
 .toasty-progress.animate {
   transform: scaleX(0);
 }
+
+.toasty-badge {
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  border-radius: 999px;
+  font-weight: bold;
+  background: rgba(0,0,0,0.1);
+  color: currentColor;
+}

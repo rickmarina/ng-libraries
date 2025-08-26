@@ -23,6 +23,7 @@ export class ToastyComponent {
   @Input() position: string = ToastyContainerPosition.BOTTOM_RIGHT;
   @Input() duration: number = this._toastService.getDefaultDuration();
   @Input() capacity: number = this._toastService.getCapacity();
+  @Input() grouping: boolean = this._toastService.getGrouping();
 
   protected toasts$ = this._toastService.newToast$;
 
@@ -66,6 +67,9 @@ export class ToastyComponent {
     }
     if (changes['capacity']) {
       this._toastService.setCapacity(changes['capacity'].currentValue);
+    }
+    if (changes['grouping']) {
+      this._toastService.setGrouping(changes['grouping'].currentValue);
     }
   }
 

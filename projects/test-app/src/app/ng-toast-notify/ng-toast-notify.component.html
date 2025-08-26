@@ -1,9 +1,9 @@
-<div class="min-h-screen bg-white text-gray-900 flex">
-   <button 
-    id="menu-toggle" 
-    class="md:hidden p-4 focus:outline-none absolute top-2 right-2 z-50"
-    (click)="sidebarOpen = !sidebarOpen"
-  >
+<div class="flex min-h-screen bg-white relative">
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black opacity-40 z-30 lg:hidden" [class.hidden]="!sidebarOpen" (click)="sidebarOpen=!sidebarOpen"></div>
+
+  <button id="menu-btn" class="fixed lg:hidden p-4 focus:outline-none top-2 right-2 z-50"
+    (click)="sidebarOpen = !sidebarOpen">
     <!-- Icono hamburguesa -->
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
@@ -11,59 +11,56 @@
   </button>
 
   <!-- Sidebar -->
-  <aside class="md:w-256 border-r border-gray-200 h-screen sticky top-0 p-6 space-y-6 text-sm overflow-y-auto md:translate-x-0 transition-transform duration-300"
-    [class.-translate-x-full]="!sidebarOpen"
-    [class.translate-x-0]="sidebarOpen"
-    [class.w-256]="sidebarOpen"
-    >
+   <aside id="sidebar" class="fixed top-0 left-0 w-64 p-6 space-y-6 h-full bg-white shadow-lg overflow-y-auto transform transition-transform duration-300 lg:translate-x-0 z-40"
+   [class.-translate-x-full]="!sidebarOpen">
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Basics</h2>
       <ul class="space-y-1">
-        <li><a href="#install" class="block px-2 py-1 rounded hover:bg-gray-100">Installation</a></li>
-        <li><a href="#addcomponent" class="block px-2 py-1 rounded hover:bg-gray-100">Add component</a></li>
-        <li><a href="#useservice" class="block px-2 py-1 rounded hover:bg-gray-100">Use service</a></li>
+        <li><a (click)="closeSidebar()" href="#install" class="block px-2 py-1 rounded hover:bg-gray-100">Installation</a></li>
+        <li><a (click)="closeSidebar()" href="#addcomponent" class="block px-2 py-1 rounded hover:bg-gray-100">Add component</a></li>
+        <li><a (click)="closeSidebar()" href="#useservice" class="block px-2 py-1 rounded hover:bg-gray-100">Use service</a></li>
 
       </ul>
     </div>
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Toasts types</h2>
       <ul class="space-y-1">
-        <li><a href="#basic-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Basic Toast</a></li>
-        <li><a href="#info-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Info/Success/Warn/Error Toast</a></li>
-        <li><a href="#html-toast" class="block px-2 py-1 rounded hover:bg-gray-100">HTML Message</a></li>
-        <li><a href="#custom-css-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Custom CSS</a></li>
-        <li><a href="#long-message-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Long Message</a></li>
-        <li><a href="#loading-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Loading Icon</a></li>
-        <li><a href="#promise-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Promise Toast</a></li>
-        <li><a href="#emoji-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Emoji Toast</a></li>
+        <li><a (click)="closeSidebar()" href="#basic-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Basic Toast</a></li>
+        <li><a (click)="closeSidebar()" href="#info-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Info/Success/Warn/Error Toast</a></li>
+        <li><a (click)="closeSidebar()" href="#html-toast" class="block px-2 py-1 rounded hover:bg-gray-100">HTML Message</a></li>
+        <li><a (click)="closeSidebar()" href="#custom-css-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Custom CSS</a></li>
+        <li><a (click)="closeSidebar()" href="#long-message-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Long Message</a></li>
+        <li><a (click)="closeSidebar()" href="#loading-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Loading Icon</a></li>
+        <li><a (click)="closeSidebar()" href="#promise-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Promise Toast</a></li>
+        <li><a (click)="closeSidebar()" href="#emoji-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Emoji Toast</a></li>
       </ul>
     </div>
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Toast config</h2>
       <ul class="space-y-1">
-        <li><a href="#swipe" class="block px-2 py-1 rounded hover:bg-gray-100">Close on swipe</a></li>
-        <li><a href="#beep" class="block px-2 py-1 rounded hover:bg-gray-100">Beep sound</a></li>
-        <li><a href="#progressbar" class="block px-2 py-1 rounded hover:bg-gray-100">Progress bar</a></li>
-        <li><a href="#sticky" class="block px-2 py-1 rounded hover:bg-gray-100">Sticky</a></li>
+        <li><a (click)="closeSidebar()" href="#swipe" class="block px-2 py-1 rounded hover:bg-gray-100">Close on swipe</a></li>
+        <li><a (click)="closeSidebar()" href="#beep" class="block px-2 py-1 rounded hover:bg-gray-100">Beep sound</a></li>
+        <li><a (click)="closeSidebar()" href="#progressbar" class="block px-2 py-1 rounded hover:bg-gray-100">Progress bar</a></li>
+        <li><a (click)="closeSidebar()" href="#sticky" class="block px-2 py-1 rounded hover:bg-gray-100">Sticky</a></li>
       </ul>
     </div>
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Toasty Container</h2>
       <ul class="space-y-1">
-        <li><a href="#container-settings" class="block px-2 py-1 rounded hover:bg-gray-100">Default settings</a></li>
+        <li><a (click)="closeSidebar()" href="#container-settings" class="block px-2 py-1 rounded hover:bg-gray-100">Settings</a></li>
       </ul>
     </div>
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">API</h2>
       <ul class="space-y-1">
-        <li><a href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToast()</a></li>
-        <li><a href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastPromise()</a></li>
+        <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToast()</a></li>
+        <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastPromise()</a></li>
       </ul>
     </div>
   </aside>
 
-  <!-- Main content -->
-  <div class="px-8 py-10 space-y-5 font-sans text-sm">
+  <!-- Contenido principal -->
+<div class="lg:ml-64 px-8 py-10 space-y-5 font-sans text-sm">
     <header class="text-center space-y-4 w-5/6">
       <h1 class="text-5xl font-bold tracking-tight">{{libName}}</h1>
       <p class="text-lg text-gray-600">Lightweight and flexible toast notifications for Angular</p>
@@ -73,7 +70,7 @@
           (click)="randomToast()">
           Make a Toast
         </button>
-        <a href="https://github.com/rickmarina/ng-toast-notify" target="_blank"
+        <a href="https://github.com/rickmarina/ng-libraries" target="_blank"
           class="px-5 py-2 border border-gray-300 rounded hover:bg-gray-100 transition text-sm">
           GitHub ↗
         </a>
@@ -204,7 +201,8 @@
       <app-code title="Position" [innerCode]='"<toasty [position]=\"containerPosition\"></toasty>"' [run]="false"></app-code>
       <app-code title="Duration" [innerCode]='"<toasty [duration]=\"containerDuration\"></toasty>"' [run]="false"></app-code>
       <app-code title="Duration" [innerCode]='"<toasty [capacity]=\"containerCapacity\"></toasty>"' [run]="false"></app-code>
-      <app-code title="All settings together" [innerCode]='"<toasty [position]=\"containerPosition\" [duration]=\"containerDuration\" [capacity]=\"containerCapacity\"></toasty>"' [run]="false"></app-code>
+      <app-code title="Grouping" [innerCode]='"<toasty [capacity]=\"containerGrouping\"></toasty>"' [run]="false"></app-code>
+      <app-code title="All settings together" [innerCode]='"<toasty [position]=\"containerPosition\" [duration]=\"containerDuration\" [capacity]=\"containerCapacity\" [grouping]=\"containerGrouping\"></toasty>"' [run]="false"></app-code>
       <section class="w-5/6">
         <span class="font-medium">Component parameters</span>
         <div class="overflow-x-auto">
@@ -238,6 +236,12 @@
                 <td class="px-4 py-2 text-gray-700">number</td>
                 <td class="px-4 py-2 text-gray-500">10</td>
                 <td class="px-4 py-2 text-gray-700">Maximum number of concurrent toasts allowed.</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-2 font-medium text-gray-900">grouping</td>
+                <td class="px-4 py-2 text-gray-700">boolean</td>
+                <td class="px-4 py-2 text-gray-500">false</td>
+                <td class="px-4 py-2 text-gray-700">Allow same toasts group together</td>
               </tr>
             </tbody>
           </table>
@@ -291,7 +295,6 @@
       </div>
     </section>
 
-    <!-- <toasty [position]="containerPosition" [duration]="containerDuration" [capacity]="containerCapacity"></toasty> -->
-    <toasty></toasty>
+    <toasty [position]="containerPosition" [duration]="containerDuration" [capacity]="containerCapacity" [grouping]="containerGrouping"></toasty>
   </div>
 </div>
