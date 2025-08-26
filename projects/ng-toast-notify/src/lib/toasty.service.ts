@@ -5,6 +5,7 @@ import { ToastysoundService } from './toastysound.service';
 interface IServiceConfig {
   capacity: number;
   duration: number;
+  grouping: boolean;
   messages: Record<string, string>;
   threshold_offsetX: number;
 }
@@ -72,6 +73,7 @@ interface ToastGesture {
 
 export interface ToastModel {
   id: number;
+  hash?: string;
   title: string;
   message: string;
   type: ToastType;
@@ -83,6 +85,7 @@ export interface ToastModel {
 
   gesture?: ToastGesture;
   animatePbar?: boolean; // Used to animate the progress bar
+  count: number; // Used to count duplicate toasts
 }
 
 export interface ToastyConfig {
@@ -112,6 +115,7 @@ export class ToastyService {
   private TOASTY_SERVICE_CONFIG: IServiceConfig = {
     capacity: 10,
     duration: 5000,
+    grouping: false,
     messages: {
       now: 'just now',
       seconds: '{0} seconds ago',
@@ -137,22 +141,43 @@ export class ToastyService {
   getDefaultDuration(): number { return this.TOASTY_SERVICE_CONFIG.duration; }
   setCapacity(c: number) { this.TOASTY_SERVICE_CONFIG.capacity = c; this.queue.setCapacity(c); }
   getCapacity(): number { return this.queue.getCapacity(); }
+  getGrouping(): boolean { return this.TOASTY_SERVICE_CONFIG.grouping; }
+  setGrouping(g: boolean) { this.TOASTY_SERVICE_CONFIG.grouping = g; }
 
   showToast(title: string, message: string, toastConfig?: ToastyConfig | undefined, isPromise?: boolean): number {
+    const hash = this.hash(title + message + (toastConfig ? JSON.stringify(toastConfig) : ''));
+
+    if (this.TOASTY_SERVICE_CONFIG.grouping) {
+      // check if a toast with the same hash already exists
+      const existingToast = this.queue.getElements().find(t => t.hash === hash);
+      if (existingToast) {
+        existingToast.count++;
+        //TODO: reset expiration time if not sticky, we have to reset the setTimeout associated to the toast too
+        // if (!existingToast.config?.sticky && !isPromise) {
+        //   existingToast.expires = Date.now() + existingToast.duration;
+        // }
+        // this.newToastBehaviorSubject.next([...this.queue.getElements()]); // Trigger re-render to show updated count
+        return existingToast.id;
+      }
+    }
+
     this.counter++;
 
     // if sticky is true duration is infinity else use the provided duration or the default one
-    const duration = toastConfig?.sticky ? Infinity : (toastConfig?.duration ?? this.TOASTY_SERVICE_CONFIG.duration);
+    // promise toasts duration is setted inifity at the beginning and updated when the promise is resolved or rejected
+    const duration = (toastConfig?.sticky || isPromise) ? Infinity : (toastConfig?.duration ?? this.TOASTY_SERVICE_CONFIG.duration);
 
     const toast: ToastModel = {
       id: this.counter,
+      hash: hash,
       title: title,
       message: message,
       type: toastConfig?.type ?? ToastType.Basic,
       timestamp: Date.now(),
       duration: duration,
-      expires: isPromise ? Infinity : Date.now() + duration,
+      expires: Date.now() + duration,
       config: toastConfig,
+      count: 1,
       get icon() {
         if (toastConfig?.type == ToastType.Success)
           return "✅";
@@ -227,14 +252,14 @@ export class ToastyService {
       .finally(() => {
         if (!config?.sticky)
           setTimeout(() => this.removeToast(idtoast), duration)
-        }
+      }
       );
 
   }
 
   removeToast(id: number): void {
     this.newToastBehaviorSubject.next([...this.queue.getElements()]); // Trigger re-render to start exit animation
-    setTimeout(() => { const t = this.queue.removeId(id); this.newToastBehaviorSubject.next([...this.queue.getElements()]);}, 500); // Wait for animation to finish before removing from queue
+    setTimeout(() => { const t = this.queue.removeId(id); this.newToastBehaviorSubject.next([...this.queue.getElements()]); }, 500); // Wait for animation to finish before removing from queue
   }
 
   closeToast(id: number): void {
@@ -285,6 +310,16 @@ export class ToastyService {
       toasts[index] = { ...toasts[index], ...newData };
       this.newToastBehaviorSubject.next([...toasts]);
     }
+  }
+
+  private hash(str: string): string {
+    let hash = 5381;
+
+    for (let i = 0; i < str.length; i++) {
+      hash = (hash * 33) ^ str.charCodeAt(i);
+    }
+
+    return (hash >>> 0).toString(16);
   }
 
 }

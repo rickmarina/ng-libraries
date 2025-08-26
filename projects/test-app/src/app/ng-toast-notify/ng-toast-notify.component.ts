@@ -23,6 +23,7 @@ export class NgToastNotifyComponent {
   public containerDuration: number = 5000;
   public containerPosition: string = 'bottom-right';
   public containerCapacity: number = 10;
+  public containerGrouping: boolean = false;
   public durationToast: number = 5;
   public libName: string = "ng-toast-notify";
 
@@ -337,5 +338,9 @@ export class NgToastNotifyComponent {
         () => Math.random() < 0.5 ? resolve({ name: 'Toasty resolved' }) : reject(new Error('Toasty rejected'))
         , 2000)
     );
+  }
+
+  closeSidebar() {
+    this.sidebarOpen = false;
   }
 }

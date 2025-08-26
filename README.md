@@ -75,3 +75,4 @@ this._toastyService.showToast('Title', 'Message body');
 2. Notify sound (beep)
 3. Progress bar
 4. Sticky toast (have to be closed manually)
+5. Group same toasts
