@@ -69,6 +69,7 @@ this._toastyService.showToast('Title', 'Message body');
 10. Loading icon
 11. Promise toast
 12. Emoji
+13. Component toast
 
 #### Toast features 
 1. Close on swipe
