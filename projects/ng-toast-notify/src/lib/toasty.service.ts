@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { ToastysoundService } from './toastysound.service';
 
@@ -61,7 +61,9 @@ export enum ToastType {
   Error = 'error',
   Info = 'info',
   Warning = 'warning',
-  Custom = 'custom'
+  Custom = 'custom',
+  Promise = 'promise',
+  Component = 'component'
 }
 
 interface ToastGesture {
@@ -97,6 +99,8 @@ export interface ToastyConfig {
   loading?: boolean;
   beep?: boolean;
   progressBar?: boolean;
+  component?: Type<any>;
+  componentParams?: Record<string, any>;
 }
 
 export interface ToastyPromise<T> {
@@ -144,7 +148,7 @@ export class ToastyService {
   getGrouping(): boolean { return this.TOASTY_SERVICE_CONFIG.grouping; }
   setGrouping(g: boolean) { this.TOASTY_SERVICE_CONFIG.grouping = g; }
 
-  showToast(title: string, message: string, toastConfig?: ToastyConfig | undefined, isPromise?: boolean): number {
+  showToast(title: string, message: string, toastConfig?: ToastyConfig | undefined): number {
     const hash = this.hash(title + message + (toastConfig ? JSON.stringify(toastConfig) : ''));
 
     if (this.TOASTY_SERVICE_CONFIG.grouping) {
@@ -165,7 +169,7 @@ export class ToastyService {
 
     // if sticky is true duration is infinity else use the provided duration or the default one
     // promise toasts duration is setted inifity at the beginning and updated when the promise is resolved or rejected
-    const duration = (toastConfig?.sticky || isPromise) ? Infinity : (toastConfig?.duration ?? this.TOASTY_SERVICE_CONFIG.duration);
+    const duration = (toastConfig?.sticky || toastConfig?.type == ToastType.Promise) ? Infinity : (toastConfig?.duration ?? this.TOASTY_SERVICE_CONFIG.duration);
 
     const toast: ToastModel = {
       id: this.counter,
@@ -208,7 +212,7 @@ export class ToastyService {
         }, 100);
       }
 
-      if (!isPromise) {
+      if (toastConfig?.type != ToastType.Promise) {
         setTimeout(() => {
           this.removeToast(toast.id);
         }, duration + 5);
@@ -219,7 +223,7 @@ export class ToastyService {
   }
 
   showToastPromise<T>(title: string, promise: ToastyPromise<T>, config?: ToastyConfig) {
-    const idtoast = this.showToast(title, promise.loading, { ...config, loading: true }, true);
+    const idtoast = this.showToast(title, promise.loading, { ...config, type: ToastType.Promise, loading: true });
     const duration = config?.duration ?? this.TOASTY_SERVICE_CONFIG.duration;
 
     promise.promise
@@ -255,6 +259,11 @@ export class ToastyService {
       }
       );
 
+  }
+
+  showToastComponent(component: Type<any>, componentParams: Record<string, any>, config?: ToastyConfig): number {
+    const toastId = this.showToast('', '', { ...config, component: component, componentParams: componentParams, type: ToastType.Component });
+    return toastId;
   }
 
   removeToast(id: number): void {

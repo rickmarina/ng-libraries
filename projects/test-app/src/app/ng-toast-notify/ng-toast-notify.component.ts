@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ToastType, ToastyComponent, ToastyService, ToastyPromise } from '../../../../ng-toast-notify/src/public-api';
 import { CodeComponent } from '../code/code.component';
 import { FormsModule } from '@angular/forms';
+import { ClockComponent } from '../clock/clock.component';
 
 type ToastMessage = {
   title: string,
@@ -321,6 +322,10 @@ export class NgToastNotifyComponent {
 
   private clickEmojiToast() {
     this._toastyService.showToast('Error', '♥️love emoji toast♥️');
+  }
+
+  clickComponentToast() {
+    this._toastyService.showToastComponent(ClockComponent, { format: 'HH:mm:ss' }, { sticky: true, customStyle: { "background-color": "#f7f8c5ff" }  }); 
   }
 
   clickPromiseToast() {
