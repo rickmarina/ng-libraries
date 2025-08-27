@@ -1,6 +1,6 @@
-import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import { AsyncPipe, NgClass, NgComponentOutlet, NgStyle } from '@angular/common';
 import { Component, HostListener, Input, SimpleChanges } from '@angular/core';
-import { ToastModel, ToastyService } from '../toasty.service';
+import { ToastModel, ToastyService, ToastType } from '../toasty.service';
 
 enum ToastyContainerPosition {
   TOP_LEFT = 'top-left',
@@ -14,7 +14,7 @@ enum ToastyContainerPosition {
 @Component({
   selector: 'toasty',
   standalone: true,
-  imports: [NgClass, NgStyle, AsyncPipe],
+  imports: [NgClass, NgStyle, AsyncPipe, NgComponentOutlet],
   templateUrl: './toasty.component.html',
   styleUrl: './toasty.component.css'
 })
@@ -24,6 +24,8 @@ export class ToastyComponent {
   @Input() duration: number = this._toastService.getDefaultDuration();
   @Input() capacity: number = this._toastService.getCapacity();
   @Input() grouping: boolean = this._toastService.getGrouping();
+
+  protected ToastType = ToastType; // to use in the template
 
   protected toasts$ = this._toastService.newToast$;
 

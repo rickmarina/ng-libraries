@@ -110,7 +110,7 @@
 }
 
 .toasty-title {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: bold;
   margin-right: auto;
 }
@@ -132,7 +132,7 @@
 }
 
 .toasty-body {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   margin-top: 1px;
 }
 

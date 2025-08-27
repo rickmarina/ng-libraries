@@ -33,6 +33,7 @@
         <li><a (click)="closeSidebar()" href="#loading-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Loading Icon</a></li>
         <li><a (click)="closeSidebar()" href="#promise-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Promise Toast</a></li>
         <li><a (click)="closeSidebar()" href="#emoji-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Emoji Toast</a></li>
+        <li><a (click)="closeSidebar()" href="#component-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Component Toast</a></li>
       </ul>
     </div>
     <div>
@@ -55,12 +56,13 @@
       <ul class="space-y-1">
         <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToast()</a></li>
         <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastPromise()</a></li>
+        <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastComponent()</a></li>
       </ul>
     </div>
   </aside>
 
   <!-- Contenido principal -->
-<div class="lg:ml-64 px-8 py-10 space-y-5 font-sans text-sm">
+<div class="lg:ml-64 px-8 py-10 space-y-5 font-sans text-base">
     <header class="text-center space-y-4 w-5/6">
       <h1 class="text-5xl font-bold tracking-tight">{{libName}}</h1>
       <p class="text-lg text-gray-600">Lightweight and flexible toast notifications for Angular</p>
@@ -79,13 +81,13 @@
 
     <section id="install" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">Installation</h2>
-      <label class="block text-sm font-medium text-gray-700 mb-2">Install via npm</label>
+      <label class="block font-medium text-gray-700 mb-2">Install via npm</label>
       <app-code [innerCode]="'npm install '+libName" [run]="false"></app-code>
     </section>
 
     <section id="addcomponent" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">Add component</h2>
-      <label class="block text-sm text-gray-700 mb-2">Add this placeholder component with the following code in your html and
+      <label class="block text-gray-700 mb-2">Add this placeholder component with the following code in your html and
         check
         out you have the required imports in your component.ts</label>
       <app-code title="component.html" [innerCode]='"<toasty></toasty>"' [run]="false"></app-code>
@@ -125,7 +127,7 @@
 
     <section id="html-toast" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">HTML Message</h2>
-      <p class="text-sm text-gray-600 mb-4">You can use HTML content in your toast message if you indicate enableHtml: true as option.</p>
+      <p class="text-gray-600 mb-4">You can use HTML content in your toast message if you indicate enableHtml: true as option.</p>
       <app-code [title]="'Basic toast with html list'" [innerCode]="'this._toastyService.showToast(\'Html\', \'<b>Details list</b><ul><li>item 1</li><li>item 2</li></ul>\', { type: ToastType.Basic, enableHtml: true });'"></app-code>
       <app-code [title]="'Success toast with html content & gif'" [innerCode]="'this._toastyService.showToast(\'Html\', \'Data successfully saved. <img width=80 src=./assets/img/dancing-spiderman.gif />\', { type: ToastType.Success, enableHtml: true });'"></app-code>
       <app-code [title]="'Info toast example with achievement unlocked'" [innerCode]="'this._toastyService.showToast(\'Wizard\', \'Achievement unlocked. <img width=100 src=./assets/img/wizard.gif />\', { type: ToastType.Info, enableHtml: true });'"></app-code>
@@ -195,6 +197,15 @@
       <app-code title="Sticky toast" [innerCode]="'this._toastyService.showToast(\'Sticky\', \'This toast is sticky and will not disappear automatically.\', { sticky: true });'" [run]="true"></app-code>
     </section>
 
+    <section id="component-toast" class="w-full max-auto">
+      <h2 class="text-2xl font-semibold mb-2">Component Toast</h2>
+      <div class="w-4/6">You can create a toast using a custom Angular component. This allows you to have full control over the content and behavior of the toast.
+      Just create your component and use the ToastType.Component type, indicating the component and optionally the input parameters. Just use <b>showToastComponent</b> method from service.</div>
+      <div class="w-4/6 my-1">Here is an example using a simple custom component that displays a clock. </div>
+      <app-code title="Component toast" [innerCode]="'this._toastyService.showToastComponent(ClockComponent, { format: \'HH:mm:ss\' }, { sticky: true, customStyle: { \'background-color\': \'#f7f8c5ff\' }  };'" [run]="false"></app-code>
+      <button class="b" (click)="clickComponentToast()">Component toast example</button> 
+    </section>
+
     <section id="container-settings" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Container settings</h2>
       <div class="w-4/6">You can set some default settinngs for toasts container.</div>
@@ -206,7 +217,7 @@
       <section class="w-5/6">
         <span class="font-medium">Component parameters</span>
         <div class="overflow-x-auto">
-          <table class="min-w-full text-sm text-left border border-gray-200 rounded overflow-hidden">
+          <table class="min-w-full text-left border border-gray-200 rounded overflow-hidden">
             <thead class="bg-gray-100 text-xs uppercase text-gray-600 border-b border-gray-200">
               <tr>
                 <th class="px-4 py-2">Name</th>

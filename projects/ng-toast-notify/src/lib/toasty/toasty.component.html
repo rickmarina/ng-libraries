@@ -4,27 +4,35 @@
         [style.transition]="item.gesture ? 'none' : 'transform 0.3s ease'">
         <div class="toasty" [attr.data-toast-id]="item.id" [ngClass]="item.type" [class.fadeout]="expires(item)"
             [ngStyle]="item.config?.customStyle">
+
             @if (item.icon) {
-            <div class="toasty-icon">{{item.icon}}</div>
+                <div class="toasty-icon">{{item.icon}}</div>
             } @else if (item.config?.loading){
-            <div class="toasty-loading"></div>
+                <div class="toasty-loading"></div>
             } @else {
-            <div class="toasty-noicon"></div>
+                <div class="toasty-noicon"></div>
             }
+
             <div class="toasty-content">
-                @if (item.title) {
-                <div class="toasty-header">
-                    <strong class="toasty-title">{{item.title}}</strong>
-                    @if (item.count > 1) {
-                        <span class="toasty-badge">x{{item.count}}</span>
-                    }
-                    <!-- <small class="toasty-time">{{item.timestamp}}</small> -->
-                </div>
-                }
-                @if (item.config?.enableHtml) {
-                <div class="toasty-body" [innerHTML]="item.message"></div>
+                @if (item.config?.type == ToastType.Component && item.config?.component) {
+                <ng-container *ngComponentOutlet="item.config?.component ?? null; 
+                                       inputs: item.config?.componentParams">
+                </ng-container>
                 } @else {
-                <div class="toasty-body">{{item.message}}</div>
+                    @if (item.title) {
+                    <div class="toasty-header">
+                        <strong class="toasty-title">{{item.title}}</strong>
+                        @if (item.count > 1) {
+                            <span class="toasty-badge">x{{item.count}}</span>
+                        }
+                        <!-- <small class="toasty-time">{{item.timestamp}}</small> -->
+                    </div>
+                    }
+                    @if (item.config?.enableHtml) {
+                    <div class="toasty-body" [innerHTML]="item.message"></div>
+                    } @else {
+                    <div class="toasty-body">{{item.message}}</div>
+                    }
                 }
             </div>
             <div class="toasty-close">
