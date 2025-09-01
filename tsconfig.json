@@ -25,6 +25,9 @@
       "ng-toast-notify": [
         "./dist/ng-toast-notify"
       ],
+      "ngx-nano-loading": [
+        "./dist/ngx-nano-loading"
+      ],
       "toasty": [
         "./dist/toasty"
       ]

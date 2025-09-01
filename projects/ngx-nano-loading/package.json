@@ -1,0 +1,31 @@
+{
+  "name": "ngx-nano-loading",
+  "version": "0.0.1",
+  "description": "A tiny loading bar for Angular applications",
+  "keywords": [
+    "angular",
+    "loading",
+    "progress",
+    "bar",
+    "ngx",
+    "nano",
+    "tiny",
+    "indicator",
+    "spinner"
+  ],
+  "author": "rickmarina",
+  "license": "MIT",
+  "homepage": "https://rickmarina.github.io/ng-libraries/#/ngx-nano-loading",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rickmarina/ng-libraries.git"
+  },
+  "peerDependencies": {
+    "@angular/common": "^17.3.0",
+    "@angular/core": "^17.3.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

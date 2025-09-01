@@ -1,0 +1,28 @@
+.progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: transparent;
+    z-index: 1000;
+}
+
+.progress-bar {
+    height: 100%;
+    transition: width 0.5s 
+}
+
+.progress-bar.red {
+    background-color: #ff0000;
+    box-shadow: -1px -5px 20px 1px rgba(253, 44, 7, 0.71);
+}
+
+.progress-bar.violet {
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+.progress-bar.orange {
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+    box-shadow: -1px -5px 20px 1px rgba(253, 44, 7, 0.71);
+}

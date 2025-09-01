@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     { path: '', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent) },
     { path: 'ng-toast-notify', loadComponent: () => import('./ng-toast-notify/ng-toast-notify.component').then(m => m.NgToastNotifyComponent) },
+    { path: 'ngx-nano-loading', loadComponent: () => import('./app-ngx-nano-loading/app-ngx-nano-loading.component').then(m => m.AppNgxNanoLoadingComponent) }
     // { path: 'ng-libraries/ng-toast-notify', loadComponent: () => import('./ng-toast-notify/ng-toast-notify.component').then(m => m.NgToastNotifyComponent) },
 
 ];

@@ -1,0 +1,8 @@
+<p>app-ngx-nano-loading works!</p>
+<ngx-nano-loading></ngx-nano-loading>
+
+<button (click)="start()" class="b">Start Loading</button>
+<button (click)="finish()" class="b">Finish Loading</button>
+
+<input type="range" min="0" max="100" step="1" [(ngModel)]="loadingValue" (ngModelChange)="updateLoadingValue($event)" />
+<!-- <button (click)="reset()">Reset Loading</button>  -->
