@@ -88,6 +88,13 @@ export interface ToastModel {
   gesture?: ToastGesture;
   animatePbar?: boolean; // Used to animate the progress bar
   count: number; // Used to count duplicate toasts
+  scheduleId?: number;
+}
+
+export interface ToastSchedule {
+  startAt: number; // timestamp in milliseconds
+  repeatEvery: number; // in milliseconds
+  repeatCount: number;
 }
 
 export interface ToastyConfig {
@@ -101,6 +108,7 @@ export interface ToastyConfig {
   progressBar?: boolean;
   component?: Type<any>;
   componentParams?: Record<string, any>;
+  schedule?: ToastSchedule;
 }
 
 export interface ToastyPromise<T> {
@@ -196,10 +204,20 @@ export class ToastyService {
       }
     };
 
-    this.queue.enqueue(toast);
+    if (toastConfig?.schedule) {
+      this.scheduleToast({ ...toast, schedule: toastConfig.schedule });
+    }
+    else {
+      this.queue.enqueue(toast);
+      this.newToastBehaviorSubject.next([...this.queue.getElements()]);
+      this.executeToastFinalLogic(toast);
+    }
 
-    this.newToastBehaviorSubject.next([...this.queue.getElements()]);
 
+    return toast.id;
+  }
+
+  private executeToastFinalLogic(toast: ToastModel): void {
     if (toast.config?.beep) {
       this._toastySoundService.notify();
     }
@@ -212,14 +230,12 @@ export class ToastyService {
         }, 100);
       }
 
-      if (toastConfig?.type != ToastType.Promise) {
+      if (toast.config?.type != ToastType.Promise) {
         setTimeout(() => {
           this.removeToast(toast.id);
-        }, duration + 5);
+        }, toast.expires - Date.now() + 5);
       }
     }
-
-    return this.counter;
   }
 
   showToastPromise<T>(title: string, promise: ToastyPromise<T>, config?: ToastyConfig) {
@@ -265,6 +281,52 @@ export class ToastyService {
     const toastId = this.showToast('', '', { ...config, component: component, componentParams: componentParams, type: ToastType.Component });
     return toastId;
   }
+
+  showToastSchedule(title: string, message: string, schedule: ToastSchedule, config: Omit<ToastyConfig, "schedule">): void {
+    const toastId = this.showToast(title, message, { ...config, schedule });
+  }
+
+  private scheduled: Map<number, { timeoutId?: ReturnType<typeof setTimeout> }> = new Map();
+
+  private scheduleToast(toast: ToastModel & Required<Pick<ToastyConfig, "schedule">>): void {
+
+    const { startAt, repeatEvery, repeatCount } = toast.schedule;
+    const now = Date.now();
+
+    let delay = 0;
+    if (startAt && startAt > now) {
+      delay = startAt - now;
+    }
+    [toast.timestamp, toast.expires] = [startAt, startAt + toast.duration];
+
+    const ref = { timeoutId: undefined as ReturnType<typeof setTimeout> | undefined };
+
+    this.scheduled.set(toast.id, ref);
+
+    ref.timeoutId = setTimeout(() => {
+      let times = 0;
+
+      const showandrepeat = () => {
+        const now = Date.now();
+        [toast.timestamp, toast.expires] = [now, now + toast.duration];
+        this.queue.enqueue(toast);
+        this.newToastBehaviorSubject.next([...this.queue.getElements()]);
+
+        this.executeToastFinalLogic(toast);
+        times++;
+
+        if (repeatEvery && (times < repeatCount || repeatCount == 0)) {
+          ref.timeoutId = setTimeout(showandrepeat, toast.duration + repeatEvery);
+        } else {
+          this.scheduled.delete(toast.id);
+        }
+      }
+
+      showandrepeat();
+    }, delay);
+  }
+
+
 
   removeToast(id: number): void {
     this.newToastBehaviorSubject.next([...this.queue.getElements()]); // Trigger re-render to start exit animation

@@ -43,6 +43,7 @@
         <li><a (click)="closeSidebar()" href="#beep" class="block px-2 py-1 rounded hover:bg-gray-100">Beep sound</a></li>
         <li><a (click)="closeSidebar()" href="#progressbar" class="block px-2 py-1 rounded hover:bg-gray-100">Progress bar</a></li>
         <li><a (click)="closeSidebar()" href="#sticky" class="block px-2 py-1 rounded hover:bg-gray-100">Sticky</a></li>
+        <li><a (click)="closeSidebar()" href="#schedule" class="block px-2 py-1 rounded hover:bg-gray-100">Schedule</a></li>
       </ul>
     </div>
     <div>
@@ -57,6 +58,7 @@
         <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToast()</a></li>
         <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastPromise()</a></li>
         <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastComponent()</a></li>
+        <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastSchedule()</a></li>
       </ul>
     </div>
   </aside>
@@ -204,6 +206,15 @@
       <div class="w-4/6 my-1">Here is an example using a simple custom component that displays a clock. </div>
       <app-code title="Component toast" [innerCode]="'this._toastyService.showToastComponent(ClockComponent, { format: \'HH:mm:ss\' }, { sticky: true, customStyle: { \'background-color\': \'#f7f8c5ff\' }  };'" [run]="false"></app-code>
       <button class="b" (click)="clickComponentToast()">Component toast example</button> 
+    </section>
+
+    <section id="schedule" class="w-full max-auto">
+      <h2 class="text-2xl font-semibold mb-2">Scheduled Toast</h2>
+      <div class="w-4/6">You can schedule a toast to appear at a specific time in the future, and optionally repeat it at regular intervals. 
+        To do this, use the <b>showToastSchedule</b> method from the service, providing a ToastSchedule object with the desired settings.
+        The following example shows how to schedule a toast to appear after 10 seconds and repeat 2 times every 8 seconds.
+      </div>
+      <app-code title="Scheduled toast" [innerCode]="scheduleToast" [run]="true"></app-code> 
     </section>
 
     <section id="container-settings" class="w-full max-auto">
