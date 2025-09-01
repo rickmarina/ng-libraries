@@ -89,6 +89,8 @@ export interface ToastModel {
   animatePbar?: boolean; // Used to animate the progress bar
   count: number; // Used to count duplicate toasts
   scheduleId?: number;
+
+  timeOutRef?: ReturnType<typeof setTimeout>
 }
 
 export interface ToastSchedule {
@@ -169,6 +171,7 @@ export class ToastyService {
         //   existingToast.expires = Date.now() + existingToast.duration;
         // }
         // this.newToastBehaviorSubject.next([...this.queue.getElements()]); // Trigger re-render to show updated count
+        this.refreshToastExpiration(existingToast);
         return existingToast.id;
       }
     }
@@ -231,7 +234,7 @@ export class ToastyService {
       }
 
       if (toast.config?.type != ToastType.Promise) {
-        setTimeout(() => {
+        toast.timeOutRef = setTimeout(() => {
           this.removeToast(toast.id);
         }, toast.expires - Date.now() + 5);
       }
@@ -380,6 +383,26 @@ export class ToastyService {
     if (index !== -1) {
       toasts[index] = { ...toasts[index], ...newData };
       this.newToastBehaviorSubject.next([...toasts]);
+    }
+  }
+
+  private refreshToastExpiration(param: { id: number } | { toast: ToastModel }): void {
+
+    let toast: ToastModel | undefined;
+    if ('id' in param) {
+      const toasts = this.queue.getElements();
+      toast = toasts.find(t => t.id === param.id);
+    } else {
+      toast = param.toast;
+    }
+
+    if (toast) {
+      clearTimeout(toast?.timeOutRef);
+
+      toast.expires = Date.now() + toast.duration;
+
+      this.executeToastFinalLogic(toast);
+      this.newToastBehaviorSubject.next([...this.queue.getElements()]);
     }
   }
 

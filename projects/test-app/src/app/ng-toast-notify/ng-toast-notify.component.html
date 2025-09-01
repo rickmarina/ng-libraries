@@ -1,70 +1,94 @@
 <div class="">
   <!-- Overlay -->
-  <div id="overlay" class="fixed inset-0 bg-black opacity-40 z-30 lg:hidden" [class.hidden]="!sidebarOpen" (click)="sidebarOpen=!sidebarOpen"></div>
+  <div id="overlay" class="fixed inset-0 bg-black opacity-40 z-30 lg:hidden" [class.hidden]="!sidebarOpen"
+    (click)="sidebarOpen=!sidebarOpen"></div>
 
   <button id="menu-btn" class="fixed lg:hidden p-4 focus:outline-none top-2 right-2 z-50"
     (click)="sidebarOpen = !sidebarOpen">
     <!-- Icono hamburguesa -->
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24"
+      stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
     </svg>
   </button>
 
   <!-- Sidebar -->
-   <aside id="sidebar" class="fixed top-0 left-0 w-64 p-6 space-y-6 h-full bg-white shadow-lg overflow-y-auto transform transition-transform duration-300 lg:translate-x-0 z-40"
-   [class.-translate-x-full]="!sidebarOpen">
+  <aside id="sidebar"
+    class="fixed top-0 left-0 w-64 p-6 space-y-6 h-full bg-white shadow-lg overflow-y-auto transform transition-transform duration-300 lg:translate-x-0 z-40"
+    [class.-translate-x-full]="!sidebarOpen">
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Basics</h2>
       <ul class="space-y-1">
-        <li><a (click)="closeSidebar()" href="#install" class="block px-2 py-1 rounded hover:bg-gray-100">Installation</a></li>
-        <li><a (click)="closeSidebar()" href="#addcomponent" class="block px-2 py-1 rounded hover:bg-gray-100">Add component</a></li>
-        <li><a (click)="closeSidebar()" href="#useservice" class="block px-2 py-1 rounded hover:bg-gray-100">Use service</a></li>
+        <li><a (click)="closeSidebar()" href="#install"
+            class="block px-2 py-1 rounded hover:bg-gray-100">Installation</a></li>
+        <li><a (click)="closeSidebar()" href="#addcomponent" class="block px-2 py-1 rounded hover:bg-gray-100">Add
+            component</a></li>
+        <li><a (click)="closeSidebar()" href="#useservice" class="block px-2 py-1 rounded hover:bg-gray-100">Use
+            service</a></li>
 
       </ul>
     </div>
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Toasts types</h2>
       <ul class="space-y-1">
-        <li><a (click)="closeSidebar()" href="#basic-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Basic Toast</a></li>
-        <li><a (click)="closeSidebar()" href="#info-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Info/Success/Warn/Error Toast</a></li>
-        <li><a (click)="closeSidebar()" href="#html-toast" class="block px-2 py-1 rounded hover:bg-gray-100">HTML Message</a></li>
-        <li><a (click)="closeSidebar()" href="#custom-css-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Custom CSS</a></li>
-        <li><a (click)="closeSidebar()" href="#long-message-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Long Message</a></li>
-        <li><a (click)="closeSidebar()" href="#loading-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Loading Icon</a></li>
-        <li><a (click)="closeSidebar()" href="#promise-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Promise Toast</a></li>
-        <li><a (click)="closeSidebar()" href="#emoji-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Emoji Toast</a></li>
-        <li><a (click)="closeSidebar()" href="#component-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Component Toast</a></li>
+        <li><a (click)="closeSidebar()" href="#basic-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Basic
+            Toast</a></li>
+        <li><a (click)="closeSidebar()" href="#info-toast"
+            class="block px-2 py-1 rounded hover:bg-gray-100">Info/Success/Warn/Error Toast</a></li>
+        <li><a (click)="closeSidebar()" href="#html-toast" class="block px-2 py-1 rounded hover:bg-gray-100">HTML
+            Message</a></li>
+        <li><a (click)="closeSidebar()" href="#custom-css-toast"
+            class="block px-2 py-1 rounded hover:bg-gray-100">Custom CSS</a></li>
+        <li><a (click)="closeSidebar()" href="#long-message-toast"
+            class="block px-2 py-1 rounded hover:bg-gray-100">Long Message</a></li>
+        <li><a (click)="closeSidebar()" href="#loading-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Loading
+            Icon</a></li>
+        <li><a (click)="closeSidebar()" href="#promise-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Promise
+            Toast</a></li>
+        <li><a (click)="closeSidebar()" href="#emoji-toast" class="block px-2 py-1 rounded hover:bg-gray-100">Emoji
+            Toast</a></li>
+        <li><a (click)="closeSidebar()" href="#component-toast"
+            class="block px-2 py-1 rounded hover:bg-gray-100">Component Toast</a></li>
       </ul>
     </div>
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Toast config</h2>
       <ul class="space-y-1">
-        <li><a (click)="closeSidebar()" href="#swipe" class="block px-2 py-1 rounded hover:bg-gray-100">Close on swipe</a></li>
-        <li><a (click)="closeSidebar()" href="#beep" class="block px-2 py-1 rounded hover:bg-gray-100">Beep sound</a></li>
-        <li><a (click)="closeSidebar()" href="#progressbar" class="block px-2 py-1 rounded hover:bg-gray-100">Progress bar</a></li>
+        <li><a (click)="closeSidebar()" href="#swipe" class="block px-2 py-1 rounded hover:bg-gray-100">Close on
+            swipe</a></li>
+        <li><a (click)="closeSidebar()" href="#beep" class="block px-2 py-1 rounded hover:bg-gray-100">Beep sound</a>
+        </li>
+        <li><a (click)="closeSidebar()" href="#progressbar" class="block px-2 py-1 rounded hover:bg-gray-100">Progress
+            bar</a></li>
         <li><a (click)="closeSidebar()" href="#sticky" class="block px-2 py-1 rounded hover:bg-gray-100">Sticky</a></li>
-        <li><a (click)="closeSidebar()" href="#schedule" class="block px-2 py-1 rounded hover:bg-gray-100">Schedule</a></li>
+        <li><a (click)="closeSidebar()" href="#schedule" class="block px-2 py-1 rounded hover:bg-gray-100">Schedule</a>
+        </li>
       </ul>
     </div>
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">Toasty Container</h2>
       <ul class="space-y-1">
-        <li><a (click)="closeSidebar()" href="#container-settings" class="block px-2 py-1 rounded hover:bg-gray-100">Settings</a></li>
+        <li><a (click)="closeSidebar()" href="#container-settings"
+            class="block px-2 py-1 rounded hover:bg-gray-100">Settings</a></li>
       </ul>
     </div>
     <div>
       <h2 class="text-xs font-semibold text-gray-400 uppercase mb-2">API</h2>
       <ul class="space-y-1">
-        <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToast()</a></li>
-        <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastPromise()</a></li>
-        <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastComponent()</a></li>
-        <li><a (click)="closeSidebar()" href="#demo-toast" class="block px-2 py-1 rounded hover:bg-gray-100">showToastSchedule()</a></li>
+        <li><a (click)="closeSidebar()" href="#demo-toast"
+            class="block px-2 py-1 rounded hover:bg-gray-100">showToast()</a></li>
+        <li><a (click)="closeSidebar()" href="#demo-toast"
+            class="block px-2 py-1 rounded hover:bg-gray-100">showToastPromise()</a></li>
+        <li><a (click)="closeSidebar()" href="#demo-toast"
+            class="block px-2 py-1 rounded hover:bg-gray-100">showToastComponent()</a></li>
+        <li><a (click)="closeSidebar()" href="#demo-toast"
+            class="block px-2 py-1 rounded hover:bg-gray-100">showToastSchedule()</a></li>
       </ul>
     </div>
   </aside>
 
   <!-- Contenido principal -->
-<div class="lg:ml-64 px-8 py-10 space-y-5 font-sans text-base">
+  <div class="lg:ml-64 px-8 py-10 space-y-5 font-sans text-base">
     <header class="text-center space-y-4 w-5/6">
       <h1 class="text-5xl font-bold tracking-tight">{{libName}}</h1>
       <p class="text-lg text-gray-600">Lightweight and flexible toast notifications for Angular</p>
@@ -93,49 +117,58 @@
         check
         out you have the required imports in your component.ts</label>
       <app-code title="component.html" [innerCode]='"<toasty></toasty>"' [run]="false"></app-code>
-      <div class="">The container can be customized for default settings: position, capacity and duration. See 
-        <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href=#container-settings>Container settings</a> to get detailed information.</div>
+      <div class="">The container can be customized for default settings: position, capacity and duration. See
+        <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href=#container-settings>Container
+          settings</a> to get detailed information.
+      </div>
       <div class="w-full mx-auto my-1">
         <app-code title="component.ts" [innerCode]="componentcode" [run]="false"></app-code>
       </div>
-      
+
     </section>
 
     <section id="useservice" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">Service</h2>
       <label class="block mb-2">Add toasty service to your component and use it to display toasts.</label>
-      <app-code title="Inject the service in your component" [innerCode]='"constructor(private _toastyService: ToastyService) &lcub; &rcub;"' [run]="false"></app-code>
+      <app-code title="Inject the service in your component"
+        [innerCode]='"constructor(private _toastyService: ToastyService) &lcub; &rcub;"' [run]="false"></app-code>
       <div>
         <label class="block mb-2">Display a basic toast!</label>
-      <app-code title="Use service to display toasts" [innerCode]="'this._toastyService.showToast(\'Title\', \'Message body\');'" [run]="true"></app-code>
+        <app-code title="Use service to display toasts"
+          [innerCode]="'this._toastyService.showToast(\'Title\', \'Message body\');'" [run]="true"></app-code>
       </div>
     </section>
 
     <section id="basic-toast" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">Basic Toast</h2>
       <label class="block mb-2">This is the most elemental toast.</label>
-      <app-code title="Basic toast" [innerCode]="'this._toastyService.showToast(\'Title\', \'Message body\');'" [run]="true"></app-code>
+      <app-code title="Basic toast" [innerCode]="'this._toastyService.showToast(\'Title\', \'Message body\');'"
+        [run]="true"></app-code>
     </section>
 
     <section id="info-toast" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">Info/Success/Warning/Error Toast</h2>
       <label class="block mb-2">Some customized toasts with color and icon.</label>
-        <button class="b" (click)="this.infoToast()">Info</button>
-        <button class="b" (click)="this.successToast()">Sucess</button>
-        <button class="b" (click)="this.WarningToast()">Warning</button>
-        <button class="b" (click)="this.ErrorToast()">Error</button>
+      <button class="b" (click)="this.infoToast()">Info</button>
+      <button class="b" (click)="this.successToast()">Sucess</button>
+      <button class="b" (click)="this.WarningToast()">Warning</button>
+      <button class="b" (click)="this.ErrorToast()">Error</button>
       <app-code [innerCode]="infosuccessetctoasts"></app-code>
     </section>
 
     <section id="html-toast" class="w-full mx-auto">
       <h2 class="text-2xl font-semibold mb-2">HTML Message</h2>
-      <p class="text-gray-600 mb-4">You can use HTML content in your toast message if you indicate enableHtml: true as option.</p>
-      <app-code [title]="'Basic toast with html list'" [innerCode]="'this._toastyService.showToast(\'Html\', \'<b>Details list</b><ul><li>item 1</li><li>item 2</li></ul>\', { type: ToastType.Basic, enableHtml: true });'"></app-code>
-      <app-code [title]="'Success toast with html content & gif'" [innerCode]="'this._toastyService.showToast(\'Html\', \'Data successfully saved. <img width=80 src=./assets/img/dancing-spiderman.gif />\', { type: ToastType.Success, enableHtml: true });'"></app-code>
-      <app-code [title]="'Info toast example with achievement unlocked'" [innerCode]="'this._toastyService.showToast(\'Wizard\', \'Achievement unlocked. <img width=100 src=./assets/img/wizard.gif />\', { type: ToastType.Info, enableHtml: true });'"></app-code>
+      <p class="text-gray-600 mb-4">You can use HTML content in your toast message if you indicate enableHtml: true as
+        option.</p>
+      <app-code [title]="'Basic toast with html list'"
+        [innerCode]="'this._toastyService.showToast(\'Html\', \'<b>Details list</b><ul><li>item 1</li><li>item 2</li></ul>\', { type: ToastType.Basic, enableHtml: true });'"></app-code>
+      <app-code [title]="'Success toast with html content & gif'"
+        [innerCode]="'this._toastyService.showToast(\'Html\', \'Data successfully saved. <img width=80 src=./assets/img/dancing-spiderman.gif />\', { type: ToastType.Success, enableHtml: true });'"></app-code>
+      <app-code [title]="'Info toast example with achievement unlocked'"
+        [innerCode]="'this._toastyService.showToast(\'Wizard\', \'Achievement unlocked. <img width=100 src=./assets/img/wizard.gif />\', { type: ToastType.Info, enableHtml: true });'"></app-code>
     </section>
 
-    
+
 
     <section id="custom-css-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Custom CSS Toast</h2>
@@ -146,25 +179,27 @@
 
       <app-code title="Blackhole toast" [innerCode]="customcode3"></app-code>
 
-      Note that you can define key:value pairs just as you would in a CSS document inside a variable and assign them to <b>customStyle: style</b>
+      Note that you can define key:value pairs just as you would in a CSS document inside a variable and assign them to
+      <b>customStyle: style</b>
     </section>
 
     <section id="long-message-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Long Message Toast</h2>
-      Toast is adapted vertically in base of the content length. 
+      Toast is adapted vertically in base of the content length.
       <app-code title="Long message toast" [innerCode]="longToast"></app-code>
     </section>
 
     <section id="loading-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Loading Icon Toast</h2>
-      Aditionally you can add a loding icon, just setting loading: true in the configuration parameter. 
+      Aditionally you can add a loding icon, just setting loading: true in the configuration parameter.
       <app-code title="Loading" [innerCode]="loadingToast"></app-code>
     </section>
 
     <section id="promise-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Promise Toast</h2>
-      <div class="w-4/6">It is possible to associate a promise. For this task you should use showToastPromise method that provides two arguments; a title and a ToastyPromise 
-      model. You can see in the following code an example.</div>
+      <div class="w-4/6">It is possible to associate a promise. For this task you should use showToastPromise method
+        that provides two arguments; a title and a ToastyPromise
+        model. You can see in the following code an example.</div>
       <app-code title="Promise" [innerCode]="promiseToast" [run]="false"></app-code>
       <button class="b" (click)="this.clickPromiseToast()">Promise toast example</button>
     </section>
@@ -172,59 +207,111 @@
     <section id="emoji-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Emoji Toast</h2>
       <div class="w-4/6">Add emoji in the toasty simple using it directly in the message body:</div>
-      <app-code title="Emoji" [innerCode]="'this._toastyService.showToast(\'Error\', \'♥️love emoji toast♥️\');'"></app-code>
+      <app-code title="Emoji"
+        [innerCode]="'this._toastyService.showToast(\'Error\', \'♥️love emoji toast♥️\');'"></app-code>
     </section>
 
     <section id="swipe" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Close on swipe</h2>
       <div class="w-4/6">You can close any toast by swiping it horizontally. This is useful for mobile devices.</div>
-      <app-code title="Swipe to close" [innerCode]="'this._toastyService.showToast(\'Swipe\', \'Swipe me to close\');'" [run]="true"></app-code>
+      <app-code title="Swipe to close" [innerCode]="'this._toastyService.showToast(\'Swipe\', \'Swipe me to close\');'"
+        [run]="true"></app-code>
     </section>
 
     <section id="beep" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Beep sound</h2>
-      <div class="w-4/6">You can enable a beep sound when a toast is displayed. This is useful for notifications that require attention. By default beeps are false</div>
-      <app-code title="Notify sound" [innerCode]="'this._toastyService.showToast(\'Beep\', \'This toast will beep\',{ beep: true });'" [run]="true"></app-code>
+      <div class="w-4/6">You can enable a beep sound when a toast is displayed. This is useful for notifications that
+        require attention. By default beeps are false</div>
+      <app-code title="Notify sound"
+        [innerCode]="'this._toastyService.showToast(\'Beep\', \'This toast will beep\',{ beep: true });'"
+        [run]="true"></app-code>
     </section>
 
     <section id="progressbar" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Progress Bar</h2>
       <div class="w-4/6">You can add a progress bar to your toast. It will animate while the toast is visible.</div>
-      <app-code title="Progress bar" [innerCode]="'this._toastyService.showToast(\'Progress\', \'This toast has a progress bar\', { progressBar: true });'" [run]="true"></app-code>
+      <app-code title="Progress bar"
+        [innerCode]="'this._toastyService.showToast(\'Progress\', \'This toast has a progress bar\', { progressBar: true });'"
+        [run]="true"></app-code>
     </section>
 
     <section id="sticky" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Sticky Toast</h2>
-      <div class="w-4/6">You can create a sticky toast that will not disappear automatically. The user must close it manually.</div>
-      <app-code title="Sticky toast" [innerCode]="'this._toastyService.showToast(\'Sticky\', \'This toast is sticky and will not disappear automatically.\', { sticky: true });'" [run]="true"></app-code>
+      <div class="w-4/6">You can create a sticky toast that will not disappear automatically. The user must close it
+        manually.</div>
+      <app-code title="Sticky toast"
+        [innerCode]="'this._toastyService.showToast(\'Sticky\', \'This toast is sticky and will not disappear automatically.\', { sticky: true });'"
+        [run]="true"></app-code>
     </section>
 
     <section id="component-toast" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Component Toast</h2>
-      <div class="w-4/6">You can create a toast using a custom Angular component. This allows you to have full control over the content and behavior of the toast.
-      Just create your component and use the ToastType.Component type, indicating the component and optionally the input parameters. Just use <b>showToastComponent</b> method from service.</div>
+      <div class="w-4/6">You can create a toast using a custom Angular component. This allows you to have full control
+        over the content and behavior of the toast.
+        Just create your component and use the ToastType.Component type, indicating the component and optionally the
+        input parameters. Just use <b>showToastComponent</b> method from service.</div>
       <div class="w-4/6 my-1">Here is an example using a simple custom component that displays a clock. </div>
-      <app-code title="Component toast" [innerCode]="'this._toastyService.showToastComponent(ClockComponent, { format: \'HH:mm:ss\' }, { sticky: true, customStyle: { \'background-color\': \'#f7f8c5ff\' }  };'" [run]="false"></app-code>
-      <button class="b" (click)="clickComponentToast()">Component toast example</button> 
+      <app-code title="Component toast"
+        [innerCode]="'this._toastyService.showToastComponent(ClockComponent, { format: \'HH:mm:ss\' }, { sticky: true, customStyle: { \'background-color\': \'#f7f8c5ff\' }  };'"
+        [run]="false"></app-code>
+      <button class="b" (click)="clickComponentToast()">Component toast example</button>
     </section>
 
     <section id="schedule" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Scheduled Toast</h2>
-      <div class="w-4/6">You can schedule a toast to appear at a specific time in the future, and optionally repeat it at regular intervals. 
-        To do this, use the <b>showToastSchedule</b> method from the service, providing a ToastSchedule object with the desired settings.
-        The following example shows how to schedule a toast to appear after 10 seconds and repeat 2 times every 8 seconds.
+      <div class="w-4/6">You can schedule a toast to appear at a specific time in the future, and optionally repeat it
+        at regular intervals.
+        To do this, use the <b>showToastSchedule</b> method from the service, providing a ToastSchedule object with the
+        desired settings.
+        The following example shows how to schedule a toast to appear after 10 seconds and repeat 2 times every 8
+        seconds.
       </div>
-      <app-code title="Scheduled toast" [innerCode]="scheduleToast" [run]="true"></app-code> 
+      <app-code title="Scheduled toast" [innerCode]="scheduleToast" [run]="true"></app-code>
     </section>
 
     <section id="container-settings" class="w-full max-auto">
       <h2 class="text-2xl font-semibold mb-2">Container settings</h2>
       <div class="w-4/6">You can set some default settinngs for toasts container.</div>
-      <app-code title="Position" [innerCode]='"<toasty [position]=\"containerPosition\"></toasty>"' [run]="false"></app-code>
-      <app-code title="Duration" [innerCode]='"<toasty [duration]=\"containerDuration\"></toasty>"' [run]="false"></app-code>
-      <app-code title="Duration" [innerCode]='"<toasty [capacity]=\"containerCapacity\"></toasty>"' [run]="false"></app-code>
-      <app-code title="Grouping" [innerCode]='"<toasty [capacity]=\"containerGrouping\"></toasty>"' [run]="false"></app-code>
-      <app-code title="All settings together" [innerCode]='"<toasty [position]=\"containerPosition\" [duration]=\"containerDuration\" [capacity]=\"containerCapacity\" [grouping]=\"containerGrouping\"></toasty>"' [run]="false"></app-code>
+      <div class="flex text-sm text-gray-600 border border-gray-300 rounded px-3 py-2 mx-auto">
+        <div class="font-bold flex-auto">Container options:</div>
+        <div class="flex-auto">
+          Duration: <input type="range" min="1000" max="10000" step="1000" [(ngModel)]="containerDuration" />
+          {{containerDuration}} msecs
+        </div>
+        <div class="flex-auto">
+          Capacity: <input type="range" min="1" max="20" step="1" [(ngModel)]="containerCapacity" />
+          {{containerCapacity}}
+        </div>
+        <div class="flex-auto">
+          Grouping: <input type="checkbox" [(ngModel)]="containerGrouping" />
+          (group same toasts)
+        </div>
+        <div class="flex-auto">
+          Position:
+          <select [(ngModel)]="containerPosition" class="ml-1">
+            <option value="top-left">Top left</option>
+            <option value="top">Top</option>
+            <option value="top-right">Top right</option>
+            <option value="bottom-left">Bottom left</option>
+            <option value="bottom">Bottom</option>
+            <option value="bottom-right">Bottom right</option>
+          </select>
+        </div>
+        <div>
+          <button (click)="randomToast()" class="b">Make a Toast</button>
+        </div>
+      </div>
+      <app-code title="Position" [innerCode]='"<toasty [position]=\"containerPosition\"></toasty>"'
+        [run]="false"></app-code>
+      <app-code title="Duration" [innerCode]='"<toasty [duration]=\"containerDuration\"></toasty>"'
+        [run]="false"></app-code>
+      <app-code title="Duration" [innerCode]='"<toasty [capacity]=\"containerCapacity\"></toasty>"'
+        [run]="false"></app-code>
+      <app-code title="Grouping" [innerCode]='"<toasty [capacity]=\"containerGrouping\"></toasty>"'
+        [run]="false"></app-code>
+      <app-code title="All settings together"
+        [innerCode]='"<toasty [position]=\"containerPosition\" [duration]=\"containerDuration\" [capacity]=\"containerCapacity\" [grouping]=\"containerGrouping\"></toasty>"'
+        [run]="false"></app-code>
       <section class="w-5/6">
         <span class="font-medium">Component parameters</span>
         <div class="overflow-x-auto">
@@ -250,8 +337,8 @@
               <tr>
                 <td class="px-4 py-2 font-medium text-gray-900">duration</td>
                 <td class="px-4 py-2 text-gray-700">number</td>
-                <td class="px-4 py-2 text-gray-500">5</td>
-                <td class="px-4 py-2 text-gray-700">Time in seconds before a toast disappears automatically.</td>
+                <td class="px-4 py-2 text-gray-500">5000</td>
+                <td class="px-4 py-2 text-gray-700">Time in mili-seconds before a toast disappears automatically.</td>
               </tr>
               <tr>
                 <td class="px-4 py-2 font-medium text-gray-900">capacity</td>
@@ -271,52 +358,7 @@
       </section>
     </section>
 
-<section id="demo-toast" class="w-full space-y-4 mx-auto hidden">
-      <h2 class="text-2xl font-semibold mb-2">Demo</h2>
-      <div class="p-3 border border-gray-200 rounded space-y-3">
-        <h3 class="text-base font-semibold">Toasty settings</h3>
-        <div class="flex gap-2">
-          <div class="flex-1">
-            <label class="block text-xs font-medium text-gray-700 mb-1">Title</label>
-            <input type="text" placeholder="Title" [(ngModel)]="title"
-              class="w-full px-3 py-1.5 border border-gray-300 rounded" />
-          </div>
-          <div class="flex-1">
-            <label class="block text-xs font-medium text-gray-700 mb-1">Message</label>
-            <textarea rows="2" placeholder="Message" [(ngModel)]="message"
-              class="w-full px-3 py-1.5 border border-gray-300 rounded resize-none"></textarea>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <label class="text-xs font-medium text-gray-700 whitespace-nowrap">Duration: {{ durationToast }}s</label>
-          <input type="range" min="1" max="10" step="1" [(ngModel)]="durationToast" class="flex-1" />
-        </div>
-      </div>
-
-      <!-- Container Settings Group -->
-      <div class="p-3 border border-gray-200 rounded space-y-3">
-        <h3 class="text-base font-semibold">Toasty container settings</h3>
-        <div class="flex gap-3">
-          <div class="flex-1">
-            <label class="block text-xs font-medium text-gray-700 mb-1">Position</label>
-            <select [(ngModel)]="containerPosition" class="w-full px-3 py-1.5 border border-gray-300 rounded">
-              <option value="top-left">Top left</option>
-              <option value="top">Top</option>
-              <option value="top-right">Top right</option>
-              <option value="bottom-left">Bottom left</option>
-              <option value="bottom">Bottom</option>
-              <option value="bottom-right">Bottom right</option>
-            </select>
-          </div>
-          <div class="flex-1 flex items-center gap-2">
-            <label class="text-xs font-medium text-gray-700 whitespace-nowrap">Capacity: {{ containerCapacity }}</label>
-            <input type="range" min="1" max="10" step="1" [(ngModel)]="containerCapacity" class="flex-1" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <toasty [position]="containerPosition" [duration]="containerDuration" [capacity]="containerCapacity" [grouping]="containerGrouping"></toasty>
+    <toasty [position]="containerPosition" [duration]="containerDuration" [capacity]="containerCapacity"
+      [grouping]="containerGrouping"></toasty>
   </div>
 </div>

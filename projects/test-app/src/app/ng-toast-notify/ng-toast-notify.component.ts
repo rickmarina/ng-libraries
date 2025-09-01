@@ -25,7 +25,6 @@ export class NgToastNotifyComponent {
   public containerPosition: string = 'bottom-right';
   public containerCapacity: number = 10;
   public containerGrouping: boolean = false;
-  public durationToast: number = 5;
   public libName: string = "ng-toast-notify";
 
   public sidebarOpen: boolean = false;
