@@ -1,6 +1,6 @@
 {
   "name": "ng-toast-notify",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Lightweight and flexible toast notifications for Angular ",
   "keywords": [
     "angular",
@@ -18,7 +18,8 @@
     "advise",
     "beep",
     "progress-bar",
-    "sticky"
+    "sticky",
+    "schedule"
   ],
   "author": "rickmarina",
   "license": "MIT",

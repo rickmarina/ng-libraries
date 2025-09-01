@@ -196,6 +196,12 @@ export class NgToastNotifyComponent {
                                           });  
   `;
 
+  public scheduleToast: string = `
+  this._toastyService.showToastSchedule('Scheduled', 'This toast was scheduled to appear after 10 seconds, repeat 2 times every 8 seconds', 
+      { startAt: Date.now() + 10000, repeatCount: 2, repeatEvery: 8000 },
+      { progressBar: true });
+  `;
+
   public infoToast() {
     this._toastyService.showToast('Info', 'Information body content', { type: ToastType.Info })
   }
@@ -297,8 +303,8 @@ export class NgToastNotifyComponent {
    */
 
     const functions = [this.basicToast, this.infoToast, this.successToast, this.WarningToast, this.ErrorToast, this.makeToast,
-      this.htmlToast, this.htmlToast2, this.htmlToast3, this.customStyleToast, this.clickLongToast, this.clickLoadingToast, this.clickPromiseToast,
-      this.clickEmojiToast, this.clickBeepToast, this.clickProgressBarToast
+    this.htmlToast, this.htmlToast2, this.htmlToast3, this.customStyleToast, this.clickLongToast, this.clickLoadingToast, this.clickPromiseToast,
+    this.clickEmojiToast, this.clickBeepToast, this.clickProgressBarToast
     ];
     const func = functions[Math.floor(Math.random() * functions.length)];
     func.bind(this)();
@@ -312,7 +318,7 @@ export class NgToastNotifyComponent {
     this._toastyService.showToast('Beep', 'This toast goes beep beep!', { type: ToastType.Info, beep: true });
   }
 
-  private clickLongToast() : void {
+  private clickLongToast(): void {
     this._toastyService.showToast("Long text", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt euismod nunc quis suscipit. Curabitur sed semper tortor, at efficitur leo. Sed justo nulla, ullamcorper sed maximus a, vehicula ut nulla. Vivamus lobortis lacinia mi eu ultricies. Suspendisse quis sem ante. Vivamus consectetur lectus eget quam venenatis, sagittis aliquam lectus viverra. Donec nec molestie magna, ut ultricies tellus. Praesent faucibus urna imperdiet vulputate dapibus. Sed sit amet dolor odio. Donec est nulla, cursus sed aliquam at, cursus sit amet turpis. Nulla ut dolor eget dui laoreet hendrerit vel at tellus. Nullam aliquet sem at mauris scelerisque molestie. Nullam imperdiet blandit est et aliquam. Vestibulum euismod, libero id tincidunt rutrum, nulla augue aliquet risus, a rutrum elit orci eget lectus.");
   }
 
@@ -325,7 +331,7 @@ export class NgToastNotifyComponent {
   }
 
   clickComponentToast() {
-    this._toastyService.showToastComponent(ClockComponent, { format: 'HH:mm:ss' }, { sticky: true, customStyle: { "background-color": "#f7f8c5ff" }  }); 
+    this._toastyService.showToastComponent(ClockComponent, { format: 'HH:mm:ss' }, { sticky: true, customStyle: { "background-color": "#f7f8c5ff" } });
   }
 
   clickPromiseToast() {
@@ -347,5 +353,11 @@ export class NgToastNotifyComponent {
 
   closeSidebar() {
     this.sidebarOpen = false;
+  }
+
+  clickScheduleToast() {
+    this._toastyService.showToastSchedule('Scheduled', 'This toast was scheduled to appear after 10 seconds, repeat 2 times every 8 seconds', 
+      { startAt: Date.now() + 10000, repeatCount: 2, repeatEvery: 8000 },
+      { progressBar: true });
   }
 }
