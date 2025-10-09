@@ -63,6 +63,8 @@
         <li><a (click)="closeSidebar()" href="#sticky" class="block px-2 py-1 rounded hover:bg-gray-100">Sticky</a></li>
         <li><a (click)="closeSidebar()" href="#schedule" class="block px-2 py-1 rounded hover:bg-gray-100">Schedule</a>
         </li>
+        <li><a (click)="closeSidebar()" href="#confirm" class="block px-2 py-1 rounded hover:bg-gray-100">Confirmation</a>
+        </li>
       </ul>
     </div>
     <div>
@@ -83,6 +85,8 @@
             class="block px-2 py-1 rounded hover:bg-gray-100">showToastComponent()</a></li>
         <li><a (click)="closeSidebar()" href="#demo-toast"
             class="block px-2 py-1 rounded hover:bg-gray-100">showToastSchedule()</a></li>
+        <li><a (click)="closeSidebar()" href="#demo-toast"
+            class="block px-2 py-1 rounded hover:bg-gray-100">showToastConfirm()</a></li>
       </ul>
     </div>
   </aside>
@@ -267,6 +271,19 @@
         seconds.
       </div>
       <app-code title="Scheduled toast" [innerCode]="scheduleToast" [run]="true"></app-code>
+    </section>
+
+    <section id="confirm" class="w-full max-auto">
+      <h2 class="text-2xl font-semibold mb-2">Confirmation Toast</h2>
+      <div class="w-4/6">You can create toasts with action buttons like OK/Cancel for user confirmation.
+        Use the <b>showToastConfirm</b> method or manually add actions to any toast using the <b>actions</b> property in ToastyConfig.
+        Action buttons execute callback functions when clicked and automatically close the toast.
+      </div>
+      <button class="b" (click)="clickConfirmToast()">Confirmation toast example</button>
+      <app-code title="Confirmation toast" [innerCode]="confirmcode" [run]="false"></app-code>
+      
+      <div class="w-4/6 mt-4">You can also create custom action buttons with multiple options:</div>
+      <button class="b" (click)="clickCustomActionsToast()">Custom actions toast example</button>
     </section>
 
     <section id="container-settings" class="w-full max-auto">

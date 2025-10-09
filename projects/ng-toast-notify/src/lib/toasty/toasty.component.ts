@@ -1,6 +1,6 @@
 import { AsyncPipe, NgClass, NgComponentOutlet, NgStyle } from '@angular/common';
 import { Component, HostListener, Input, SimpleChanges } from '@angular/core';
-import { ToastModel, ToastyService, ToastType } from '../toasty.service';
+import { ToastAction, ToastModel, ToastyService, ToastType } from '../toasty.service';
 
 enum ToastyContainerPosition {
   TOP_LEFT = 'top-left',
@@ -78,6 +78,10 @@ export class ToastyComponent {
 
   closeToast(id: number): void {
     this._toastService.closeToast(id);
+  }
+
+  executeAction(action: ToastAction): void {
+    action.callback();
   }
 
   containerClass(): string[] {

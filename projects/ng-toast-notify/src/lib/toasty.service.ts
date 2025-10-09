@@ -99,6 +99,12 @@ export interface ToastSchedule {
   repeatCount: number;
 }
 
+export interface ToastAction {
+  label: string;
+  callback: () => void;
+  class?: string; // Para styling personalizado
+}
+
 export interface ToastyConfig {
   type?: ToastType;
   duration?: number;
@@ -111,6 +117,7 @@ export interface ToastyConfig {
   component?: Type<any>;
   componentParams?: Record<string, any>;
   schedule?: ToastSchedule;
+  actions?: ToastAction[]; // Array de botones/acciones
 }
 
 export interface ToastyPromise<T> {
@@ -287,6 +294,40 @@ export class ToastyService {
 
   showToastSchedule(title: string, message: string, schedule: ToastSchedule, config: Omit<ToastyConfig, "schedule">): void {
     const toastId = this.showToast(title, message, { ...config, schedule });
+  }
+
+  showToastConfirm(title: string, message: string, onConfirm: () => void, onCancel?: () => void, config?: Omit<ToastyConfig, 'actions'>): number {
+    // Primero creamos el toast sin acciones para obtener el ID
+    const toastId = this.showToast(title, message, { 
+      ...config, 
+      sticky: true, // Confirmation toasts should not be dismissible by timeout
+      type: config?.type || ToastType.Info
+    });
+
+    // Ahora que tenemos el ID, creamos las acciones que lo referencian
+    const actions: ToastAction[] = [
+      {
+        label: 'OK',
+        callback: () => {
+          onConfirm();
+          this.closeToast(toastId);
+        },
+        class: 'confirm-btn'
+      },
+      {
+        label: 'Cancel',
+        callback: () => {
+          if (onCancel) onCancel();
+          this.closeToast(toastId);
+        },
+        class: 'cancel-btn'
+      }
+    ];
+
+    // Actualizamos el toast con las acciones
+    this.updateToast(toastId, { config: { ...config, actions, sticky: true, type: config?.type || ToastType.Info } });
+
+    return toastId;
   }
 
   private scheduled: Map<number, { timeoutId?: ReturnType<typeof setTimeout> }> = new Map();

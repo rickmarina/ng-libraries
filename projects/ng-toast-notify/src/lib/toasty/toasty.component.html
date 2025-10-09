@@ -64,6 +64,19 @@
                 } @else {
                 <div class="toasty-body">{{item.message}}</div>
                 }
+                
+                @if (item.config?.actions?.length) {
+                <div class="toasty-actions">
+                    @for (action of item.config?.actions; track $index) {
+                    <button type="button" 
+                            class="toasty-action-btn"
+                            [ngClass]="action?.class"
+                            (click)="executeAction(action)">
+                        {{action?.label}}
+                    </button>
+                    }
+                </div>
+                }
                 }
             </div>
             <div class="toasty-close">

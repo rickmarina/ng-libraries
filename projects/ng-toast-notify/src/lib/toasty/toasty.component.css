@@ -176,3 +176,46 @@
   background: rgba(0,0,0,0.1);
   color: currentColor;
 }
+
+.toasty-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: flex-end;
+}
+
+.toasty-action-btn {
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background: rgba(0, 0, 0, 0.05);
+  color: inherit;
+}
+
+.toasty-action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.toasty-action-btn.confirm-btn {
+  background: hsl(210, 92%, 45%);
+  color: #fff;
+  opacity: 0.7;
+}
+
+.toasty-action-btn.confirm-btn:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.toasty-action-btn.cancel-btn {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.toasty-action-btn.cancel-btn:hover {
+  background: rgba(0, 0, 0, 0.25);
+}

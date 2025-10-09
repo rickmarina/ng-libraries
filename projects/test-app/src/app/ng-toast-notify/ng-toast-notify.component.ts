@@ -359,4 +359,78 @@ export class NgToastNotifyComponent {
       { startAt: Date.now() + 10000, repeatCount: 2, repeatEvery: 8000 },
       { progressBar: true });
   }
+
+  // Nuevos métodos para toast de confirmación
+  public confirmcode: string = `
+  this._toastyService.showToastConfirm(
+      'Delete Item', 
+      'Are you sure you want to delete this item? This action cannot be undone.',
+      () => {
+        console.log('Item deleted!');
+        this._toastyService.showToast('Deleted', 'Item has been deleted successfully', { type: ToastType.Success });
+      },
+      () => {
+        console.log('Cancelled');
+        this._toastyService.showToast('Cancelled', 'Delete operation was cancelled', { type: ToastType.Info });
+      },
+      { type: ToastType.Warning }
+    );
+  `;
+
+  clickConfirmToast() {
+    this._toastyService.showToastConfirm(
+      'Delete Item', 
+      'Are you sure you want to delete this item? This action cannot be undone.',
+      () => {
+        console.log('Item deleted!');
+        this._toastyService.showToast('Deleted', 'Item has been deleted successfully', { type: ToastType.Success });
+      },
+      () => {
+        console.log('Cancelled');
+        this._toastyService.showToast('Cancelled', 'Delete operation was cancelled', { type: ToastType.Info });
+      },
+      { type: ToastType.Warning }
+    );
+  }
+
+  clickCustomActionsToast() {
+    const customActions = [
+      {
+        label: 'View Details',
+        callback: () => {
+          console.log('View details clicked');
+          this._toastyService.closeToast(toastId);
+          this._toastyService.showToast('Details', 'Opening details view...', { type: ToastType.Info });
+        },
+        class: 'confirm-btn'
+      },
+      {
+        label: 'Edit',
+        callback: () => {
+          console.log('Edit clicked');
+          this._toastyService.closeToast(toastId);
+          this._toastyService.showToast('Edit', 'Opening edit mode...', { type: ToastType.Info });
+        }
+      },
+      {
+        label: 'Delete',
+        callback: () => {
+          console.log('Delete clicked');
+          this._toastyService.closeToast(toastId);
+          this._toastyService.showToast('Deleted', 'Item deleted!', { type: ToastType.Error });
+        },
+        class: 'cancel-btn'
+      }
+    ];
+
+    const toastId = this._toastyService.showToast(
+      'New Message', 
+      'You have received a new message. What would you like to do?',
+      { 
+        type: ToastType.Info, 
+        sticky: true,
+        actions: customActions
+      }
+    );
+  }
 }
